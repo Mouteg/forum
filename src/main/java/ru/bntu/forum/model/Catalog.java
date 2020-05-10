@@ -1,21 +1,25 @@
 package ru.bntu.forum.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
-public class Catalog {
+@Data
+public class Catalog extends DateAudit{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
     private String name;
 
-    @Lob
-    private String description;
+    private String slug;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "catalog_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
-//    private Set<Post> posts = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "catalog_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private Set<Post> posts = new HashSet<>();
 
 }
