@@ -37,7 +37,11 @@ public class Post extends DateAudit {
 
     @ManyToMany
     @JoinTable(name = "posts_tag", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
-    private List<Tag> tags = new ArrayList<Tag>();
+    private List<Tag> tags;
+
+    @OneToMany
+    @JoinTable(name = "post_comments", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private List<Comment> comments;
     
     private String slug;
 

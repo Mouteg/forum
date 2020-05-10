@@ -1,10 +1,12 @@
 package ru.bntu.forum.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 public class Comment extends DateAudit  {
