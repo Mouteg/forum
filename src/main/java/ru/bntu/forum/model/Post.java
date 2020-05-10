@@ -31,12 +31,14 @@ public class Post extends DateAudit {
     @Lob
     private String content;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "users_post", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> favorites;
 
-    private List<String> tags = new ArrayList<String>();
-
+    @ManyToMany
+    @JoinTable(name = "posts_tag", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private List<Tag> tags = new ArrayList<Tag>();
+    
     private String slug;
 
     private boolean pinned;

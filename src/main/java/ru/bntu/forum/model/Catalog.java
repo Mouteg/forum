@@ -18,7 +18,7 @@ public class Catalog extends DateAudit{
 
     private String slug;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "catalog_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<Post> posts = new HashSet<>();
 
