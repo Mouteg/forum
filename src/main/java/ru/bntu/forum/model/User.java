@@ -17,7 +17,13 @@ import java.util.UUID;
 @Entity
 @Data
 public class User extends DateAudit {
-    @Id
+    public User(String username, String email, String passwordHash) {
+		this.username = username;
+		this.email = email;
+		this.passwordHash = passwordHash;
+	}
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
@@ -33,7 +39,7 @@ public class User extends DateAudit {
     @Email
     private String email;
 
-    private String password;
+    private String passwordHash;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
