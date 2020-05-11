@@ -28,7 +28,7 @@ public class UserController {
     UserService userService;
 	
     @GetMapping("/me")
-    public User getMe(HttpServletRequest request){
+    public User getMe(HttpServletRequest request) {
     	return (User) request.getSession().getAttribute("User");
     }
 

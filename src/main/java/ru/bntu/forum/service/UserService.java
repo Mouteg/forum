@@ -24,6 +24,7 @@ public class UserService {
 		
 		var roleName = userRepository.count() == 0 ? "Admin" : "User";
 		user.setRole(roleName);
+		
 		userRepository.save(user);
 		return user;
 	}
