@@ -16,13 +16,12 @@ import javax.sql.DataSource;
 @EnableJdbcHttpSession
 public class SessionConfig
         extends AbstractHttpSessionApplicationInitializer {
+//
+//    @Bean
+//    public JedisConnectionFactory connectionFactory() {
+//        return new JedisConnectionFactory();
+//    }
 
-    @Bean
-    public EmbeddedDatabase dataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript("org/springframework/session/jdbc/schema-h2.sql").build();
-    }
 
     @Bean
     public PlatformTransactionManager transactionManager(DataSource dataSource) {

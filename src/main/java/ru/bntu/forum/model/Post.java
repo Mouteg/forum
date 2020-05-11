@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-//@NoArgsConstructor
 public class Post extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

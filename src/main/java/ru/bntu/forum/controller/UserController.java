@@ -19,25 +19,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 	
     @Autowired
     UserService userService;
 	
-    @GetMapping(value = "/me")
+    @GetMapping("/me")
     public User getMe(HttpServletRequest request){
     	return (User) request.getSession().getAttribute("User");
     }
-    
+
     @PostMapping("/register")
     public @ResponseBody
     ResponseEntity RegisterUser(
             @RequestParam String username,
             @RequestParam String email,
             @RequestParam String passwordHash,
-            HttpServletRequest request) {
+            HttpServletRequest request,
+            HttpServletResponse response) {
     	User user = userService.createUser(username, email, passwordHash);
     	request.getSession().setAttribute("User", user);
     	return new ResponseEntity(HttpStatus.OK);
