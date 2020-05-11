@@ -1,6 +1,7 @@
 package ru.bntu.forum.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+//@NoArgsConstructor
 public class Post extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,13 +18,13 @@ public class Post extends DateAudit {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "posts_catalog", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "catalog_id"))
-    private Catalog catalog = new Catalog();
+    private Catalog catalog;
 
     private UUID catalogId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "posts_user", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User user = new User();
+    private User user;
 
     private UUID userId;
 
@@ -33,7 +35,7 @@ public class Post extends DateAudit {
 
     @ManyToMany
     @JoinTable(name = "users_post", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> favorites;
+    private List<User> favorites = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "posts_tag", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
@@ -46,4 +48,24 @@ public class Post extends DateAudit {
     private String slug;
 
     private boolean pinned;
+
+    public Post(UUID userId,
+                User user,
+                UUID catalogId,
+                Catalog catalog,
+                String title,
+                String content,
+                List<Tag> tags,
+                boolean pinned,
+                String slug) {
+        this.userId = userId;
+        this.user = user;
+        this.catalogId = catalogId;
+        this.catalog = catalog;
+        this.title = title;
+        this.content = content;
+        this.tags = tags;
+        this.pinned = pinned;
+        this.slug = slug;
+    }
 }

@@ -16,19 +16,19 @@ public class Comment extends DateAudit  {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "comments_catalog", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "catalog_id"))
-    private Catalog catalog = new Catalog();
+    private Catalog catalog;
 
     private UUID catalogId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "comments_post", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
-    private Post post = new Post();
+    private Post post;
 
     private UUID postId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "comments_user", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User user = new User();
+    private User user;
 
     private UUID userId;
 
