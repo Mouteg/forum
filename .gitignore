@@ -23,5 +23,9 @@
 hs_err_pid*
 
 .idea
-.mvn
-target
+.mvn/
+target/
+.settings/
+
+.classpath
+.project
