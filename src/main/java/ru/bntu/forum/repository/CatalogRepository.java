@@ -6,4 +6,5 @@ import ru.bntu.forum.model.Catalog;
 import java.util.UUID;
 
 public interface CatalogRepository extends JpaRepository<Catalog, UUID> {
+    Catalog findBySlug(String slug);
 }

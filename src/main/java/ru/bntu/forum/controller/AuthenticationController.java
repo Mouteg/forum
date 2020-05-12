@@ -3,8 +3,8 @@ package ru.bntu.forum.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.UUID;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ru.bntu.forum.model.UserCookieModel;
-import ru.bntu.forum.model.UserViewModel;
+import ru.bntu.forum.dto.UserCookieDto;
+import ru.bntu.forum.dto.UserDto;
 import ru.bntu.forum.service.SecurityService;
 import ru.bntu.forum.service.UserService;
 
@@ -35,17 +35,20 @@ public class AuthenticationController {
     @Autowired
     SecurityService securityService;
 
+    @Value("${cookie.max-age}")
+    private static int cookieMaxAge;
+
     @PostMapping("/register")
     public @ResponseBody
-    ResponseEntity<?> RegisterUser(HttpServletRequest request,
-            @RequestBody UserViewModel userModel) {
+    ResponseEntity<?> RegisterUser(
+            @RequestBody UserDto userModel) {
         userService.createUser(userModel.username, userModel.email, userModel.passwordHash);
-        return new ResponseEntity<Object>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/login")
     public @ResponseBody ResponseEntity<String> login(
-    			@RequestBody UserViewModel userModel,
+    			@RequestBody UserDto userModel,
                 HttpServletRequest request,
                 HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
         try{
@@ -60,28 +63,30 @@ public class AuthenticationController {
             	userCookie = null;
             }
 
-            // if we don't have the user already in session, check our cookie MY_SESSION_COOKIE
             if (userCookie == null) {
                 securityService.login(userModel.username, userModel.passwordHash);
-                UserCookieModel userCookieModel = new UserCookieModel(userService.findByUsername(userModel.username));
+                UserCookieDto userCookieDto = new UserCookieDto(userService.findByUsername(userModel.username));
        		 
        		 	ObjectMapper objectMapper = new ObjectMapper();
-                String json = objectMapper.writeValueAsString(userCookieModel);
+                String json = objectMapper.writeValueAsString(userCookieDto);
                 
                 System.out.println(json);
                 
                 userCookie = new Cookie("User_COOKIE", URLEncoder.encode(json, "UTF-8"));
                 
             	userCookie.setPath("/");
-//            	userCookie.setMaxAge(86400); // valid for one day, choose your value
+            	userCookie.setMaxAge(cookieMaxAge);
                 response.addCookie(userCookie);
                 
                 System.out.print("Created login cookie");
             }
-            // if we have our cookie, check it
             else {
-            	;//userCookie.setMaxAge();
-            }            
+                userCookie = new Cookie(userCookie.getName(), userCookie.getValue());
+                userCookie.setPath("/");
+            	userCookie.setMaxAge(cookieMaxAge);
+                response.addCookie(userCookie);
+            }
+
             
             return new ResponseEntity<>(HttpStatus.OK);
         }catch(UsernameNotFoundException e){
@@ -89,7 +94,21 @@ public class AuthenticationController {
         }
 
     }
-    
+
+    @GetMapping("/logout")
+    public ResponseEntity logout(HttpServletRequest request) throws ServletException {
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            Cookie userCookie = Arrays.stream(cookies).filter(c -> c.getName()
+                    .equals("User_COOKIE")).findAny().orElse(null);
+            if (userCookie != null) {
+                userCookie.setMaxAge(0);
+                request.logout();
+            }
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @PostMapping("/checkUsername")
     public boolean existsUsername(@RequestParam String username){

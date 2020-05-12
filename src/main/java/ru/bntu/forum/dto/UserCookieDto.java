@@ -1,14 +1,16 @@
-package ru.bntu.forum.model;
+package ru.bntu.forum.dto;
 
 import java.util.Set;
 import java.util.UUID;
 
 import lombok.NoArgsConstructor;
+import ru.bntu.forum.model.Post;
+import ru.bntu.forum.model.User;
 
 @NoArgsConstructor
-public class UserCookieModel {
+public class UserCookieDto {
 
-    public UserCookieModel(User user) {
+    public UserCookieDto(User user) {
 		this.username = user.getUsername();
 		this.email = user.getEmail();
 		this.id = user.getId();

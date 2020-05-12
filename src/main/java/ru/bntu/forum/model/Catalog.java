@@ -1,6 +1,7 @@
 package ru.bntu.forum.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,12 +10,19 @@ import java.util.UUID;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Catalog extends DateAudit{
+
+    public Catalog(String title, String slug){
+        this.id = UUID.randomUUID();
+        this.title = title;
+        this.slug = slug;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private String name;
+    private String title;
 
     private String slug;
 

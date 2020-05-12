@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "cookie.max-age",
+      "type": "java.lang.Integer",
+      "description": "Description for cookie.max-age."
+  }
+] }

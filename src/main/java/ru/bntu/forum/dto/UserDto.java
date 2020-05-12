@@ -1,6 +1,6 @@
-package ru.bntu.forum.model;
+package ru.bntu.forum.dto;
 
-public class UserViewModel {
+public class UserDto {
 
     public String username;
 
