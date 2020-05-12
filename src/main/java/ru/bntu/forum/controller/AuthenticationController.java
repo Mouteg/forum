@@ -40,7 +40,7 @@ public class AuthenticationController {
                 HttpServletRequest request) {
         try{
             securityService.login(username, passwordHash);
-            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession();
             session.setAttribute("User", userService.findByUsername(username));
             return new ResponseEntity<>(HttpStatus.OK);
         }catch(UsernameNotFoundException e){
