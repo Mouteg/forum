@@ -2,6 +2,7 @@ package ru.bntu.forum.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 import ru.bntu.forum.enums.Locales;
 
@@ -16,15 +17,17 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@NoArgsConstructor
 public class User extends DateAudit {
     public User(String username, String email, String passwordHash) {
 		this.username = username;
 		this.email = email;
 		this.passwordHash = passwordHash;
+		this.id = UUID.randomUUID();
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @NotBlank
