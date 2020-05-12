@@ -10,16 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -77,14 +73,14 @@ public class AuthenticationController {
                 userCookie = new Cookie("User_COOKIE", URLEncoder.encode(json, "UTF-8"));
                 
             	userCookie.setPath("/");
-            	userCookie.setMaxAge(86400); // valid for one day, choose your value
+//            	userCookie.setMaxAge(86400); // valid for one day, choose your value
                 response.addCookie(userCookie);
                 
                 System.out.print("Created login cookie");
             }
             // if we have our cookie, check it
             else {
-            	userCookie.setMaxAge(86400);
+            	;//userCookie.setMaxAge();
             }            
             
             return new ResponseEntity<>(HttpStatus.OK);
@@ -93,7 +89,7 @@ public class AuthenticationController {
         }
 
     }
-
+    
 
     @PostMapping("/checkUsername")
     public boolean existsUsername(@RequestParam String username){
