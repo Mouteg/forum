@@ -1,17 +1,33 @@
 package ru.bntu.forum.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.UUID;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.*;
-import ru.bntu.forum.model.User;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ru.bntu.forum.model.UserCookieModel;
+import ru.bntu.forum.model.UserViewModel;
 import ru.bntu.forum.service.SecurityService;
 import ru.bntu.forum.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,23 +41,52 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public @ResponseBody
-    ResponseEntity RegisterUser(
-            @RequestParam String username,
-            @RequestParam String email,
-            @RequestParam String passwordHash) {
-        userService.createUser(username, email, passwordHash);
-        return new ResponseEntity(HttpStatus.OK);
+    ResponseEntity<?> RegisterUser(HttpServletRequest request,
+            @RequestBody UserViewModel userModel) {
+        userService.createUser(userModel.username, userModel.email, userModel.passwordHash);
+        return new ResponseEntity<Object>(HttpStatus.OK);
     }
 
     @PostMapping("/login")
     public @ResponseBody ResponseEntity<String> login(
-                @RequestParam String username,
-                @RequestParam String passwordHash,
-                HttpServletRequest request) {
+    			@RequestBody UserViewModel userModel,
+                HttpServletRequest request,
+                HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
         try{
-            securityService.login(username, passwordHash);
-            HttpSession session = request.getSession();
-            session.setAttribute("User", userService.findByUsername(username));
+        	Cookie[] cookies = request.getCookies();
+            Cookie userCookie;
+            
+            if (cookies != null) {
+            	userCookie = Arrays.stream(request.getCookies()).filter(c -> c.getName()
+                    .equals("User_COOKIE")).findAny().orElse(null);
+            }
+            else {
+            	userCookie = null;
+            }
+
+            // if we don't have the user already in session, check our cookie MY_SESSION_COOKIE
+            if (userCookie == null) {
+                securityService.login(userModel.username, userModel.passwordHash);
+                UserCookieModel userCookieModel = new UserCookieModel(userService.findByUsername(userModel.username));
+       		 
+       		 	ObjectMapper objectMapper = new ObjectMapper();
+                String json = objectMapper.writeValueAsString(userCookieModel);
+                
+                System.out.println(json);
+                
+                userCookie = new Cookie("User_COOKIE", URLEncoder.encode(json, "UTF-8"));
+                
+            	userCookie.setPath("/");
+            	userCookie.setMaxAge(86400); // valid for one day, choose your value
+                response.addCookie(userCookie);
+                
+                System.out.print("Created login cookie");
+            }
+            // if we have our cookie, check it
+            else {
+            	userCookie.setMaxAge(86400);
+            }            
+            
             return new ResponseEntity<>(HttpStatus.OK);
         }catch(UsernameNotFoundException e){
             return new ResponseEntity<>("Bad Credentials", HttpStatus.FORBIDDEN);

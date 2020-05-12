@@ -1,24 +1,26 @@
 package ru.bntu.forum.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import ru.bntu.forum.model.Tag;
-import ru.bntu.forum.model.User;
-import ru.bntu.forum.service.PostService;
-import ru.bntu.forum.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import ru.bntu.forum.model.UserCookieModel;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,8 +29,27 @@ public class UserController {
 
 	
     @GetMapping("/me")
-    public User getMe(HttpServletRequest request) {
-    	return (User) request.getSession().getAttribute("User");
+    public UserCookieModel getMe(HttpServletRequest request) throws UnsupportedEncodingException {
+    	
+    	Cookie[] cookies = request.getCookies();
+    	
+    	UserCookieModel userCookieModel = null;
+    	
+    	if (cookies != null) {
+    		 Cookie userCookie = Arrays.stream(cookies).filter(c -> c.getName()
+                    .equals("User_COOKIE")).findAny().orElse(null);
+    		 if (userCookie != null) {
+	    		 ObjectMapper objectMapper = new ObjectMapper();
+	
+	    		 try {
+	    			 userCookieModel = objectMapper.readValue(URLDecoder.decode(userCookie.getValue(), "UTF-8"), UserCookieModel.class);
+	    		 } catch (JsonProcessingException e) {
+					e.printStackTrace();
+	    		 }
+    		 }
+    	}
+    	
+    	return userCookieModel;
     }
     
     @GetMapping("/messages")
