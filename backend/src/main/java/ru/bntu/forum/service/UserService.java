@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ru.bntu.forum.dto.UserProfileDto;
+import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.User;
 import ru.bntu.forum.repository.UserRepository;
 
@@ -36,4 +38,13 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public UserProfileDto getProfile(String username) {
+        User user = userRepository.findByUsername(username);
+        UserProfileDto dto = new UserProfileDto();
+        dto.user = user;
+        for(Post p : user.getPosts()){
+            dto.commentCount.put(p, p.getComments().size());
+        }
+        return dto;
+    }
 }
