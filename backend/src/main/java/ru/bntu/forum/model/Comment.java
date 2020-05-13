@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 public class Comment extends DateAudit  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -32,5 +32,16 @@ public class Comment extends DateAudit  {
 
     private UUID userId;
 
-    private String text;
+    private String content;
+
+    public Comment(UUID userId, User user, UUID postId, Post post, UUID catalogId, Catalog catalog, String content) {
+        this.id = UUID.randomUUID();
+        this.userId = userId;
+        this.user = user;
+        this.postId = postId;
+        this.post = post;
+        this.catalogId = catalogId;
+        this.catalog = catalog;
+        this.content = content;
+    }
 }

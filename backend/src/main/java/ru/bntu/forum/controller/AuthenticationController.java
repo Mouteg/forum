@@ -2,6 +2,7 @@ package ru.bntu.forum.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import javax.servlet.ServletException;
@@ -70,9 +71,7 @@ public class AuthenticationController {
        		 	ObjectMapper objectMapper = new ObjectMapper();
                 String json = objectMapper.writeValueAsString(userCookieDto);
                 
-                System.out.println(json);
-                
-                userCookie = new Cookie("User_COOKIE", URLEncoder.encode(json, "UTF-8"));
+                userCookie = new Cookie("User_COOKIE", URLEncoder.encode(json, StandardCharsets.UTF_8));
                 
             	userCookie.setPath("/");
             	userCookie.setMaxAge(cookieMaxAge);
@@ -96,7 +95,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity logout(HttpServletRequest request) throws ServletException {
+    public ResponseEntity<?> logout(HttpServletRequest request) throws ServletException {
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -107,7 +106,7 @@ public class AuthenticationController {
                 request.logout();
             }
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/checkUsername")

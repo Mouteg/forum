@@ -2,7 +2,6 @@ package ru.bntu.forum.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.bntu.forum.model.Catalog;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.Tag;
@@ -13,7 +12,7 @@ import ru.bntu.forum.repository.UserRepository;
 import ru.bntu.forum.utils.Tools;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -46,6 +45,23 @@ public class PostService {
         Catalog catalog = catalogRepository.findById(catalogId).get();
         Post post = new Post(userId, user, catalogId, catalog, title, content, tags, pinned, slug);
         postRepository.save(post);
+        return post;
+    }
+
+    public void deletePost(String slug){
+        postRepository.delete(postRepository.findBySlug(slug).get());
+    }
+
+    public Post toggleFavorites(UUID postId, UUID id) {
+        Post post = postRepository.findById(postId).get();
+        User user = userRepository.findById(id).get();
+        Set<User> favorites = post.getFavorites();
+        if(favorites.contains(user)){
+            favorites.remove(user);
+        }else{
+            favorites.add(user);
+        };
+        post.setFavorites(favorites);
         return post;
     }
 

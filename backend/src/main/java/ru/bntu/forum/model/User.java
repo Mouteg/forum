@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
-import ru.bntu.forum.enums.Locales;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -27,7 +26,7 @@ public class User extends DateAudit {
 	}
 
 	@Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
 
     @NotBlank

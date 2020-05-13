@@ -1,11 +1,11 @@
 package ru.bntu.forum.dto;
 
-import java.util.Set;
-import java.util.UUID;
-
 import lombok.NoArgsConstructor;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.User;
+
+import java.util.Set;
+import java.util.UUID;
 
 @NoArgsConstructor
 public class UserCookieDto {

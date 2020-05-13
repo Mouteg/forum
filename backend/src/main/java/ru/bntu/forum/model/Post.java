@@ -1,18 +1,18 @@
 package ru.bntu.forum.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Data
 public class Post extends DateAudit {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -34,7 +34,7 @@ public class Post extends DateAudit {
 
     @ManyToMany
     @JoinTable(name = "users_post", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> favorites = new ArrayList<User>();
+    private Set<User> favorites = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "posts_tag", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
@@ -57,6 +57,7 @@ public class Post extends DateAudit {
                 List<Tag> tags,
                 boolean pinned,
                 String slug) {
+        this.id = UUID.randomUUID();
         this.userId = userId;
         this.user = user;
         this.catalogId = catalogId;
@@ -66,5 +67,9 @@ public class Post extends DateAudit {
         this.tags = tags;
         this.pinned = pinned;
         this.slug = slug;
+    }
+
+    public int compare(Set<?> o1, Set<?> o2) {
+        return Integer.compare(o1.size(), o2.size());
     }
 }
