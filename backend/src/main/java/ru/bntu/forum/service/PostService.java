@@ -1,7 +1,12 @@
 package ru.bntu.forum.service;
 
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ru.bntu.forum.model.Catalog;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.Tag;
@@ -10,10 +15,6 @@ import ru.bntu.forum.repository.CatalogRepository;
 import ru.bntu.forum.repository.PostRepository;
 import ru.bntu.forum.repository.UserRepository;
 import ru.bntu.forum.utils.Tools;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 @Service
 public class PostService {

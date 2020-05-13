@@ -1,15 +1,20 @@
 package ru.bntu.forum.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.bntu.forum.dto.CommentDto;
-import ru.bntu.forum.model.Post;
-import ru.bntu.forum.service.CommentService;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
+import ru.bntu.forum.dto.CommentDto;
+import ru.bntu.forum.dto.DeleteActionDto;
+import ru.bntu.forum.service.CommentService;
 
 @RestController
 @RequestMapping(value = "/api/comment", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,13 +33,15 @@ public class CommentController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteComment(@RequestBody UUID id){
+    public DeleteActionDto deleteComment(@RequestBody UUID id){
+    	DeleteActionDto deleteDto = new DeleteActionDto();
         try{
             commentService.deleteComment(id);
+            deleteDto.deleted = true;
         }catch (Throwable e){
-            return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
+            e.printStackTrace();//return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return deleteDto;//return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

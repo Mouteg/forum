@@ -1,18 +1,19 @@
 package ru.bntu.forum.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.bntu.forum.model.Catalog;
-import ru.bntu.forum.model.DateAudit;
-import ru.bntu.forum.model.Post;
-import ru.bntu.forum.repository.CatalogRepository;
-import ru.bntu.forum.repository.PostRepository;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ru.bntu.forum.model.Catalog;
+import ru.bntu.forum.model.DateAudit;
+import ru.bntu.forum.model.Post;
+import ru.bntu.forum.repository.CatalogRepository;
+import ru.bntu.forum.repository.PostRepository;
 
 @Service
 public class CatalogService {

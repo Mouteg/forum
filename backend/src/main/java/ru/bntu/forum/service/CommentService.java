@@ -1,8 +1,10 @@
 package ru.bntu.forum.service;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.bntu.forum.dto.CommentDto;
+
 import ru.bntu.forum.model.Catalog;
 import ru.bntu.forum.model.Comment;
 import ru.bntu.forum.model.Post;
@@ -11,9 +13,6 @@ import ru.bntu.forum.repository.CatalogRepository;
 import ru.bntu.forum.repository.CommentRepository;
 import ru.bntu.forum.repository.PostRepository;
 import ru.bntu.forum.repository.UserRepository;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class CommentService {

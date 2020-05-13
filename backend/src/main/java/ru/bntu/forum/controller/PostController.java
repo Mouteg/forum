@@ -1,19 +1,25 @@
 package ru.bntu.forum.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.bntu.forum.dto.PostDto;
-import ru.bntu.forum.model.Post;
-import ru.bntu.forum.model.Tag;
-import ru.bntu.forum.service.PostService;
-import ru.bntu.forum.utils.Tools;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.UUID;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import ru.bntu.forum.dto.DeleteActionDto;
+import ru.bntu.forum.dto.PostDto;
+import ru.bntu.forum.model.Post;
+import ru.bntu.forum.service.PostService;
+import ru.bntu.forum.utils.Tools;
 
 @RestController
 @RequestMapping(value = "/api/post", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,13 +38,16 @@ public class PostController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deletePost(@RequestBody String slug){
+    public DeleteActionDto deletePost(@RequestBody String slug, HttpServletResponse response){
+    	DeleteActionDto deleteDto = new DeleteActionDto();
         try{
             postService.deletePost(slug);
+            deleteDto.deleted = true;
         }catch (Throwable e){
-            return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
+        	e.printStackTrace();//return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        //return new ResponseEntity<>(HttpStatus.OK);
+        return deleteDto;
     }
 
     @PutMapping(value = "/like/{discussionId}")

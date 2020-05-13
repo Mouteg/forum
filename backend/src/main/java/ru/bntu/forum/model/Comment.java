@@ -1,16 +1,40 @@
 package ru.bntu.forum.model;
 
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+
+import org.springframework.data.relational.core.mapping.Table;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.persistence.*;
-import java.util.UUID;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@NoArgsConstructor
+@Table(value="comment")
 public class Comment extends DateAudit  {
-    @Id
+
+    public Comment(UUID userId, User user, UUID postId, Post post, UUID catalogId, Catalog catalog, String content) {
+        this.id = UUID.randomUUID();
+        this.userId = userId;
+        this.user = user;
+        this.postId = postId;
+        this.post = post;
+        this.catalogId = catalogId;
+        this.catalog = catalog;
+        this.content = content;
+    }
+	
+	@Id
     @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
 
@@ -33,15 +57,4 @@ public class Comment extends DateAudit  {
     private UUID userId;
 
     private String content;
-
-    public Comment(UUID userId, User user, UUID postId, Post post, UUID catalogId, Catalog catalog, String content) {
-        this.id = UUID.randomUUID();
-        this.userId = userId;
-        this.user = user;
-        this.postId = postId;
-        this.post = post;
-        this.catalogId = catalogId;
-        this.catalog = catalog;
-        this.content = content;
-    }
 }

@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ru.bntu.forum.dto.UserProfileDto;
-import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.User;
 import ru.bntu.forum.repository.UserRepository;
 
@@ -40,11 +39,12 @@ public class UserService {
 
     public UserProfileDto getProfile(String username) {
         User user = userRepository.findByUsername(username);
-        UserProfileDto dto = new UserProfileDto();
-        dto.user = user;
-        for(Post p : user.getPosts()){
+        /*UserProfileDto dto = new UserProfileDto();
+        dto.user = new UserCookieDto(user);*/
+        UserProfileDto dto = new UserProfileDto(user);
+        /*for(Post p : user.getPosts()){
             dto.commentCount.put(p, p.getComments().size());
-        }
+        }*/
         return dto;
     }
 }

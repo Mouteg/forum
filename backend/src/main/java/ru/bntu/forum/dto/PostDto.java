@@ -1,10 +1,9 @@
 package ru.bntu.forum.dto;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.bntu.forum.model.Tag;
-
 import java.util.List;
 import java.util.UUID;
+
+import ru.bntu.forum.model.Tag;
 
 public class PostDto {
     public UUID userId;

@@ -9,5 +9,5 @@ public class AdminInfoDto {
     public int postCount;
     public int commentCount;
     public int catalogCount;
-    public List<Catalog> catalogs;
+    public List<Catalog> forums;
 }

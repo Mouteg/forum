@@ -1,17 +1,57 @@
 package ru.bntu.forum.model;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.springframework.data.relational.core.mapping.Table;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@NoArgsConstructor
+@Table(value="post")
 public class Post extends DateAudit {
-    @Id
+
+	public Post(UUID userId,
+	            User user,
+	            UUID catalogId,
+	            Catalog catalog,
+	            String title,
+	            String content,
+	            List<Tag> tags,
+	            boolean pinned,
+	            String slug) {
+		
+	    this.id = UUID.randomUUID();
+	    this.userId = userId;
+	    this.user = user;
+	    this.catalogId = catalogId;
+	    this.catalog = catalog;
+	    this.title = title;
+	    this.content = content;
+	    this.tags = tags;
+	    this.pinned = pinned;
+	    this.slug = slug;
+	}
+	
+	@Id
     @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
 
@@ -47,29 +87,4 @@ public class Post extends DateAudit {
     private String slug;
 
     private boolean pinned;
-
-    public Post(UUID userId,
-                User user,
-                UUID catalogId,
-                Catalog catalog,
-                String title,
-                String content,
-                List<Tag> tags,
-                boolean pinned,
-                String slug) {
-        this.id = UUID.randomUUID();
-        this.userId = userId;
-        this.user = user;
-        this.catalogId = catalogId;
-        this.catalog = catalog;
-        this.title = title;
-        this.content = content;
-        this.tags = tags;
-        this.pinned = pinned;
-        this.slug = slug;
-    }
-
-    public int compare(Set<?> o1, Set<?> o2) {
-        return Integer.compare(o1.size(), o2.size());
-    }
 }
