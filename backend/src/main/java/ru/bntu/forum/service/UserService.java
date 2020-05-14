@@ -1,11 +1,15 @@
 package ru.bntu.forum.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ru.bntu.forum.dto.UserProfileDto;
+import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.User;
+import ru.bntu.forum.repository.PostRepository;
 import ru.bntu.forum.repository.UserRepository;
 
 @Service
@@ -13,6 +17,9 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PostRepository postRepository;
+    
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -30,7 +37,7 @@ public class UserService {
 		var roleName = userRepository.count() == 0 ? "Admin" : "User";
 		user.setRole(roleName);
         System.out.println(user.getId());
-		userRepository.save(user);
+		userRepository.saveAndFlush(user);
 	}
 
 	public User findByUsername(String username){
@@ -41,7 +48,8 @@ public class UserService {
         User user = userRepository.findByUsername(username);
         /*UserProfileDto dto = new UserProfileDto();
         dto.user = new UserCookieDto(user);*/
-        UserProfileDto dto = new UserProfileDto(user);
+        List<Post> postsByUser = postRepository.findByUser(user);
+        UserProfileDto dto = new UserProfileDto(user, postsByUser);
         /*for(Post p : user.getPosts()){
             dto.commentCount.put(p, p.getComments().size());
         }*/

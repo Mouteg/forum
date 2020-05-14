@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.bntu.forum.dto.CatalogDto;
+import ru.bntu.forum.dto.CreateActionDto;
 import ru.bntu.forum.dto.DeleteActionDto;
 import ru.bntu.forum.model.Catalog;
 import ru.bntu.forum.model.Post;
@@ -26,8 +27,16 @@ public class CatalogController {
     CatalogService catalogService;
 
     @PostMapping("/create")
-    public void createCatalog(@RequestBody CatalogDto dto){
-        catalogService.createCatalog(dto.title, dto.slug);
+    public CreateActionDto createCatalog(@RequestBody CatalogDto dto){
+    	CreateActionDto createDto = new CreateActionDto();
+        try{
+        	catalogService.createCatalog(dto.title, dto.slug);
+            createDto.created = true;
+        }catch (Throwable e){
+        	e.printStackTrace();//return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
+        }
+        //return new ResponseEntity<>(HttpStatus.OK);
+        return createDto;
     }
 
     @PostMapping("/delete")

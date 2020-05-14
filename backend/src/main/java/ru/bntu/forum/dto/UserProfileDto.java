@@ -1,6 +1,6 @@
 package ru.bntu.forum.dto;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 import ru.bntu.forum.model.Post;
@@ -12,12 +12,12 @@ public class UserProfileDto {
 
     public Dictionary<Post, Integer> commentCount;*/
 	
-	 public UserProfileDto(User user) {
+	 public UserProfileDto(User user, List<Post> postsByUser) {
 			this.username = user.getUsername();
 			this.email = user.getEmail();
 			this.id = user.getId();
 			this.role = user.getRole();
-			this.posts = user.getPosts();
+			this.posts = postsByUser;
 		}
 
 	    public UUID id;
@@ -28,5 +28,5 @@ public class UserProfileDto {
 
 	    public String role;
 
-	    public Set<Post> posts;
+	    public List<Post> posts;
 }

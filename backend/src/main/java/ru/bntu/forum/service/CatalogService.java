@@ -26,7 +26,7 @@ public class CatalogService {
 
     public void createCatalog(String title, String slug) {
         Catalog catalog = new Catalog(title, slug);
-        catalogRepository.save(catalog);
+        catalogRepository.saveAndFlush(catalog);
     }
 
     public Catalog findBySlug(String slug){
@@ -34,8 +34,7 @@ public class CatalogService {
     }
 
     public void deleteCatalog(UUID id) {
-        Catalog catalog = catalogRepository.findById(id).get();
-        catalogRepository.delete(catalog);
+        catalogRepository.deleteById(id);
     }
 
     public List<Catalog> getAllCatalogs(){

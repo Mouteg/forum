@@ -32,7 +32,7 @@ public class Catalog extends DateAudit{
 
     private String slug;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "catalog_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Post> posts = new ArrayList<>();
 

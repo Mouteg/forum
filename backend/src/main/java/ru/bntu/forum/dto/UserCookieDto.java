@@ -1,11 +1,9 @@
 package ru.bntu.forum.dto;
 
-import lombok.NoArgsConstructor;
-import ru.bntu.forum.model.Post;
-import ru.bntu.forum.model.User;
-
-import java.util.Set;
 import java.util.UUID;
+
+import lombok.NoArgsConstructor;
+import ru.bntu.forum.model.User;
 
 @NoArgsConstructor
 public class UserCookieDto {
@@ -15,7 +13,6 @@ public class UserCookieDto {
 		this.email = user.getEmail();
 		this.id = user.getId();
 		this.role = user.getRole();
-		this.posts = user.getPosts();
 	}
 
     public UUID id;
@@ -25,7 +22,5 @@ public class UserCookieDto {
     public String email;
 
     public String role;
-
-    public Set<Post> posts;
 
 }

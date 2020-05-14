@@ -34,10 +34,10 @@ public class CommentService {
         Catalog catalog = catalogRepository.findById(catalogId).get();
 
         Comment comment = new Comment(userId, user, postId, post, catalogId, catalog, content);
-        commentRepository.save(comment);
+        commentRepository.saveAndFlush(comment);
     }
 
     public void deleteComment(UUID id) {
-        commentRepository.delete(commentRepository.findById(id).get());
+        commentRepository.deleteById(id);
     }
 }

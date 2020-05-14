@@ -5,10 +5,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -51,7 +60,7 @@ public class Post extends DateAudit {
     private Catalog catalog;
 
     private UUID catalogId;
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "user_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User user;
@@ -71,7 +80,7 @@ public class Post extends DateAudit {
     @JoinTable(name = "posts_tag", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Tag> tags;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "post_comments", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Comment> comments;
     

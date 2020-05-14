@@ -1,15 +1,14 @@
 package ru.bntu.forum.model;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.NaturalId;
 import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.Data;
@@ -48,9 +47,8 @@ public class User extends DateAudit {
 
     private String role;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_posts", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
-    private Set<Post> posts = new HashSet<>();
-
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_posts", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
+//    private Set<Post> posts = new HashSet<>();
 
 }

@@ -1,6 +1,5 @@
 package ru.bntu.forum.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -40,7 +39,7 @@ public class PostService {
         return postRepository.findById(id).orElse(null);
     }
 
-    public Post createPost(UUID userId,
+    public String createPost(UUID userId,
                            UUID catalogId,
                            String title,
                            String content,
@@ -53,8 +52,9 @@ public class PostService {
         User user = userRepository.getOne(userId);
         Catalog catalog = catalogRepository.findById(catalogId).get();
         Post post = new Post(userId, user, catalogId, catalog, title, content, tags, pinned, slug);
-        postRepository.save(post);
-        return post;
+        postRepository.saveAndFlush(post);
+        
+        return slug;
     }
 
     public void deletePost(String slug){
@@ -71,9 +71,7 @@ public class PostService {
             favorites.add(user);
         };
         post.setFavorites(favorites);
+        postRepository.saveAndFlush(post);
         return post;
     }
-
-//    public Post toggleFavorites(UUID postId) {
-//    }
 }

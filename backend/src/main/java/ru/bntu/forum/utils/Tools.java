@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Tools {
     public static String generateSlug(String title){
         UUID id = UUID.randomUUID();
-        return title.replaceAll("[^a-z0-9]gi", "").toLowerCase() + "" + id;
+        return title.replaceAll("[^a-z0-9]gi", "").toLowerCase() + "_" + id.toString().replaceAll("-", "");
     }
 
     public static UserCookieDto getMe(HttpServletRequest request){

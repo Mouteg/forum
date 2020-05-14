@@ -37,7 +37,7 @@ public class Comment extends DateAudit  {
 	@Id
     @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
-    @JsonIgnore
+	
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "comments_catalog", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "catalog_id"))
     private Catalog catalog;
