@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(value="tag")
 public class Tag extends DateAudit {
 	
 	public Tag(String name) {

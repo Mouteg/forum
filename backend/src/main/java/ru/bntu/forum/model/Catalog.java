@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -21,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(value="catalog")
 public class Catalog extends DateAudit{
 	
 	public Catalog(String title, String slug){
@@ -38,7 +32,7 @@ public class Catalog extends DateAudit{
 
     private String slug;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "catalog_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Post> posts = new ArrayList<>();
 

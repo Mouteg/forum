@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(value="comment")
 public class Comment extends DateAudit  {
 
     public Comment(UUID userId, User user, UUID postId, Post post, UUID catalogId, Catalog catalog, String content) {

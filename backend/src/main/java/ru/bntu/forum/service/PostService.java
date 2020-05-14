@@ -50,7 +50,7 @@ public class PostService {
             tagRepository.save(t);
         }
         String slug = Tools.generateSlug(title);
-        User user = userRepository.findById(userId).get();
+        User user = userRepository.getOne(userId);
         Catalog catalog = catalogRepository.findById(catalogId).get();
         Post post = new Post(userId, user, catalogId, catalog, title, content, tags, pinned, slug);
         postRepository.save(post);

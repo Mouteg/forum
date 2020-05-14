@@ -4,13 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -26,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(value="user")
+@Table("user")
 public class User extends DateAudit {
 
 	public User(String username, String email, String passwordHash) {
@@ -42,11 +36,9 @@ public class User extends DateAudit {
 
     @NotBlank
     @Size(max = 15)
-
     @Column(unique=true)
     private String username;
 
-    @NaturalId
     @NotBlank
     @Size(max = 40)
     @Email
@@ -56,7 +48,7 @@ public class User extends DateAudit {
 
     private String role;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_posts", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<Post> posts = new HashSet<>();
 

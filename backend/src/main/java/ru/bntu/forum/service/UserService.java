@@ -29,7 +29,7 @@ public class UserService {
 		
 		var roleName = userRepository.count() == 0 ? "Admin" : "User";
 		user.setRole(roleName);
-
+        System.out.println(user.getId());
 		userRepository.save(user);
 	}
 
