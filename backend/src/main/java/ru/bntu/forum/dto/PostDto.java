@@ -1,9 +1,9 @@
 package ru.bntu.forum.dto;
 
+import ru.bntu.forum.model.Tag;
+
 import java.util.List;
 import java.util.UUID;
-
-import ru.bntu.forum.model.Tag;
 
 public class PostDto {
     public UUID userId;

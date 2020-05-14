@@ -1,5 +1,6 @@
 package ru.bntu.forum.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import ru.bntu.forum.model.Tag;
 import ru.bntu.forum.model.User;
 import ru.bntu.forum.repository.CatalogRepository;
 import ru.bntu.forum.repository.PostRepository;
+import ru.bntu.forum.repository.TagRepository;
 import ru.bntu.forum.repository.UserRepository;
 import ru.bntu.forum.utils.Tools;
 
@@ -26,6 +28,9 @@ public class PostService {
 
     @Autowired
     CatalogRepository catalogRepository;
+
+    @Autowired
+    TagRepository tagRepository;
 
     public Post getSinglePostBySlug(String slug){
         return postRepository.findBySlug(slug).orElse(null);
@@ -41,6 +46,9 @@ public class PostService {
                            String content,
                            List<Tag> tags,
                            boolean pinned){
+        for(Tag t: tags){
+            tagRepository.save(t);
+        }
         String slug = Tools.generateSlug(title);
         User user = userRepository.findById(userId).get();
         Catalog catalog = catalogRepository.findById(catalogId).get();

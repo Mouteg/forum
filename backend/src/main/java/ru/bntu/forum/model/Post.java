@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.Data;
@@ -54,15 +55,15 @@ public class Post extends DateAudit {
 	@Id
     @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "posts_catalog", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "catalog_id"))
+    @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "catalog_id"))
     private Catalog catalog;
 
     private UUID catalogId;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "posts_user", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "user_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private User user;
 
     private UUID userId;
@@ -73,7 +74,7 @@ public class Post extends DateAudit {
     private String content;
 
     @ManyToMany
-    @JoinTable(name = "users_post", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "favorites_post", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> favorites = new HashSet<>();
 
     @ManyToMany

@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.Data;
@@ -37,7 +38,7 @@ public class Comment extends DateAudit  {
 	@Id
     @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "comments_catalog", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "catalog_id"))
     private Catalog catalog;
@@ -45,7 +46,7 @@ public class Comment extends DateAudit  {
     private UUID catalogId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "comments_post", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
+    @JoinTable(name = "post_comments", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Post post;
 
     private UUID postId;
