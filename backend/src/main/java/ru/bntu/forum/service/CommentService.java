@@ -28,13 +28,18 @@ public class CommentService {
     @Autowired
     CatalogRepository catalogRepository;
 
-    public void createComment(UUID userId, UUID postId, UUID catalogId, String content) {
+    public UUID createComment(UUID userId, UUID postId, UUID catalogId, String content) {
         User user = userRepository.findById(userId).get();
         Post post = postRepository.findById(postId).get();
         Catalog catalog = catalogRepository.findById(catalogId).get();
 
-        Comment comment = new Comment(userId, user, postId, post, catalogId, catalog, content);
-        commentRepository.saveAndFlush(comment);
+        Comment comment = new Comment(userId, user, postId, post, catalogId, catalog, content);   
+        commentRepository.save(comment);
+        
+        post.getComments().add(comment);
+        postRepository.saveAndFlush(post);
+        
+        return comment.getId();
     }
 
     public void deleteComment(UUID id) {

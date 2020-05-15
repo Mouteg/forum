@@ -3,9 +3,7 @@ package ru.bntu.forum.controller;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +25,8 @@ public class CommentController {
     public CreateActionDto createComment(@RequestBody CommentDto dto){
         CreateActionDto createActionDto = new CreateActionDto();
         try{
-            commentService.createComment(dto.user_id, dto.discussion_id, dto.forum_id, dto.content);
-            createActionDto.created = true;
+            UUID id = commentService.createComment(dto.user_id, dto.discussion_id, dto.forum_id, dto.content);
+            createActionDto.id = id;
         }catch (Throwable e){
             e.printStackTrace();
         }

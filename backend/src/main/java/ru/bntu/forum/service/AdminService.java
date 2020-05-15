@@ -27,9 +27,9 @@ public class AdminService {
         AdminInfoDto data = new AdminInfoDto();
         data.userCount = userRepository.findAll().size();
         data.forums = catalogRepository.findAll();
-        data.catalogCount = data.forums.size();
-        data.postCount = postRepository.findAll().size();
-        data.commentCount = commentRepository.findAll().size();
+        data.forumCount = data.forums.size();
+        data.discussionCount = postRepository.findAll().size();
+        data.opinionCount = commentRepository.findAll().size();
         return data;
     }
 }
