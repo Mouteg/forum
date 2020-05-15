@@ -32,7 +32,8 @@ public class PostService {
     TagRepository tagRepository;
 
     public Post getSinglePostBySlug(String slug){
-        return postRepository.findBySlug(slug).orElse(null);
+        Post post =  postRepository.findBySlug(slug).orElse(null);
+        return post;
     }
 
     public Post getSinglePostById(UUID id){

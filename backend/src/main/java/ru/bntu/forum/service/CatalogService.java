@@ -2,6 +2,7 @@ package ru.bntu.forum.service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -46,7 +47,11 @@ public class CatalogService {
     }
 
     public List<Post> getAllPosts(UUID id, String sorting_method, boolean pinned) {
-        List<Post> postsUnsorted = catalogRepository.findById(id).get().getPosts();
+        Optional<Catalog> catalogOpt = catalogRepository.findById(id);
+        if(catalogOpt.isEmpty()){
+            return null;
+        }
+        List<Post> postsUnsorted = postRepository.findByCatalog(catalogOpt.get());
         List<Post> posts = postsUnsorted;
         if(postsUnsorted.size() > 0){
             Predicate<Post> isPinned = post-> post.isPinned() == pinned;

@@ -28,7 +28,7 @@ public class CommentService {
     @Autowired
     CatalogRepository catalogRepository;
 
-    public void createPost(UUID userId, UUID postId, UUID catalogId, String content) {
+    public void createComment(UUID userId, UUID postId, UUID catalogId, String content) {
         User user = userRepository.findById(userId).get();
         Post post = postRepository.findById(postId).get();
         Catalog catalog = catalogRepository.findById(catalogId).get();

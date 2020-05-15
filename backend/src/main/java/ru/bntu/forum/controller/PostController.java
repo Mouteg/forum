@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.bntu.forum.dto.CreateActionDto;
 import ru.bntu.forum.dto.DeleteActionDto;
-import ru.bntu.forum.dto.PostDto;
+import ru.bntu.forum.dto.PostCreationDto;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.service.PostService;
 import ru.bntu.forum.utils.Tools;
@@ -35,7 +34,7 @@ public class PostController {
     }
 
     @PostMapping(value = "/create")
-    public CreateActionDto createPost(@RequestBody PostDto dto){
+    public CreateActionDto createPost(@RequestBody PostCreationDto dto){
     	CreateActionDto createDto = new CreateActionDto();
         try{
         	String slug = postService.createPost(dto.userId, dto.forumId, dto.title, dto.content, dto.tags, dto.pinned);

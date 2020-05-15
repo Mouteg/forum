@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.bntu.forum.dto.CommentDto;
+import ru.bntu.forum.dto.CreateActionDto;
 import ru.bntu.forum.dto.DeleteActionDto;
 import ru.bntu.forum.service.CommentService;
 
@@ -23,13 +24,15 @@ public class CommentController {
     CommentService commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> getAllPosts(@RequestBody CommentDto dto){
+    public CreateActionDto createComment(@RequestBody CommentDto dto){
+        CreateActionDto createActionDto = new CreateActionDto();
         try{
-            commentService.createPost(dto.userId, dto.postId, dto.catalogId, dto.content);
+            commentService.createComment(dto.user_id, dto.discussion_id, dto.forum_id, dto.content);
+            createActionDto.created = true;
         }catch (Throwable e){
-            return new ResponseEntity<>("Error during creation",HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return createActionDto;
     }
 
     @DeleteMapping("/delete")

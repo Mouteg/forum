@@ -54,7 +54,7 @@ public class Post extends DateAudit {
 	@Id
     @Column(name = "id", length = 16, unique = true, nullable = false)
     private UUID id;
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "catalog_id"))
     private Catalog catalog;
@@ -72,15 +72,15 @@ public class Post extends DateAudit {
     @Lob
     private String content;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "favorites_post", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> favorites = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "posts_tag", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Tag> tags;
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "post_comments", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Comment> comments;
     
