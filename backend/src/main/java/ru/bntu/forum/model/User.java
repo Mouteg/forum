@@ -46,9 +46,4 @@ public class User extends DateAudit {
     private String passwordHash;
 
     private String role;
-
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_posts", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
-//    private Set<Post> posts = new HashSet<>();
-
 }

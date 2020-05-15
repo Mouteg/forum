@@ -19,6 +19,7 @@ import ru.bntu.forum.utils.Tools;
 
 @Service
 public class PostService {
+	
     @Autowired
     PostRepository postRepository;
 
@@ -46,7 +47,7 @@ public class PostService {
                            String content,
                            List<Tag> tags,
                            boolean pinned){
-        for(Tag t: tags){
+        for(Tag t: tags) {
             tagRepository.save(t);
         }
         String slug = Tools.generateSlug(title);
@@ -68,7 +69,8 @@ public class PostService {
         Set<User> favorites = post.getFavorites();
         if(favorites.contains(user)){
             favorites.remove(user);
-        }else{
+        }
+        else {
             favorites.add(user);
         };
         post.setFavorites(favorites);

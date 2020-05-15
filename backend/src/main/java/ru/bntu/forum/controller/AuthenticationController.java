@@ -106,15 +106,18 @@ public class AuthenticationController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request) throws ServletException {
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
             Cookie userCookie = Arrays.stream(cookies).filter(c -> c.getName()
                     .equals("User_COOKIE")).findAny().orElse(null);
             if (userCookie != null) {
-                userCookie.setMaxAge(0);
                 request.logout();
+                Cookie cookie = new Cookie("User_COOKIE", "");
+                cookie.setMaxAge(0);
+                cookie.setPath("/");
+                response.addCookie(cookie);
             }
         }
         return new ResponseEntity<>(HttpStatus.OK);

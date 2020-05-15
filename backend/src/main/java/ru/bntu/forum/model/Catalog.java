@@ -1,12 +1,10 @@
 package ru.bntu.forum.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.*;
-
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,9 +29,5 @@ public class Catalog extends DateAudit{
     private String title;
 
     private String slug;
-
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "catalog_posts", joinColumns = @JoinColumn(name = "catalog_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
-//    private List<Post> posts = new ArrayList<>();
 
 }

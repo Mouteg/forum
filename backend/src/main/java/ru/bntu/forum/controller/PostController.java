@@ -41,9 +41,8 @@ public class PostController {
             createDto.created = true;
             createDto.slug = slug;
         }catch (Throwable e){
-        	e.printStackTrace();//return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
+        	e.printStackTrace();
         }
-        //return new ResponseEntity<>(HttpStatus.OK);
         return createDto;
     }
 
@@ -54,9 +53,8 @@ public class PostController {
             postService.deletePost(slug);
             deleteDto.deleted = true;
         }catch (Throwable e){
-        	e.printStackTrace();//return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
+        	e.printStackTrace();
         }
-        //return new ResponseEntity<>(HttpStatus.OK);
         return deleteDto;
     }
 

@@ -46,13 +46,8 @@ public class UserService {
 
     public UserProfileDto getProfile(String username) {
         User user = userRepository.findByUsername(username);
-        /*UserProfileDto dto = new UserProfileDto();
-        dto.user = new UserCookieDto(user);*/
         List<Post> postsByUser = postRepository.findByUser(user);
         UserProfileDto dto = new UserProfileDto(user, postsByUser);
-        /*for(Post p : user.getPosts()){
-            dto.commentCount.put(p, p.getComments().size());
-        }*/
         return dto;
     }
 }

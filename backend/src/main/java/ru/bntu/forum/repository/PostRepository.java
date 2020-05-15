@@ -10,9 +10,13 @@ import org.springframework.stereotype.Repository;
 import ru.bntu.forum.model.Catalog;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.User;
+
 @Repository
 public interface PostRepository extends JpaRepository<Post, UUID> {
+	
     Optional<Post> findBySlug(String slug);
+    
     List<Post> findByUser(User user);
+    
     List<Post> findByCatalog(Catalog catalog);
 }

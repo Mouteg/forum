@@ -40,9 +40,9 @@ public class CommentController {
             commentService.deleteComment(id);
             deleteDto.deleted = true;
         }catch (Throwable e){
-            e.printStackTrace();//return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
         }
-        return deleteDto;//return new ResponseEntity<>(HttpStatus.OK);
+        return deleteDto;
     }
 
 

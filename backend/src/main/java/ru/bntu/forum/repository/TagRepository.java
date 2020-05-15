@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.bntu.forum.model.Tag;
 
 import java.util.UUID;
+
 @Repository
 public interface TagRepository extends JpaRepository<Tag, UUID> {
 }

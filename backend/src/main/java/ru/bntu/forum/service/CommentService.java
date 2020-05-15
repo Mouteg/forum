@@ -5,11 +5,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ru.bntu.forum.model.Catalog;
 import ru.bntu.forum.model.Comment;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.User;
-import ru.bntu.forum.repository.CatalogRepository;
 import ru.bntu.forum.repository.CommentRepository;
 import ru.bntu.forum.repository.PostRepository;
 import ru.bntu.forum.repository.UserRepository;
@@ -25,15 +23,12 @@ public class CommentService {
 
     @Autowired
     PostRepository postRepository;
-    @Autowired
-    CatalogRepository catalogRepository;
 
     public UUID createComment(UUID userId, UUID postId, UUID catalogId, String content) {
         User user = userRepository.findById(userId).get();
         Post post = postRepository.findById(postId).get();
-        Catalog catalog = catalogRepository.findById(catalogId).get();
 
-        Comment comment = new Comment(userId, user, postId, post, catalogId, catalog, content);   
+        Comment comment = new Comment(userId, user, content);   
         commentRepository.save(comment);
         
         post.getComments().add(comment);

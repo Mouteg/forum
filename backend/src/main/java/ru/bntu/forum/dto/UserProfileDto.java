@@ -7,10 +7,6 @@ import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.User;
 
 public class UserProfileDto {
-
-    /*public UserCookieDto user;
-
-    public Dictionary<Post, Integer> commentCount;*/
 	
 	 public UserProfileDto(User user, List<Post> postsByUser) {
 			this.username = user.getUsername();

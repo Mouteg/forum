@@ -33,9 +33,8 @@ public class CatalogController {
         	catalogService.createCatalog(dto.title, dto.slug);
             createDto.created = true;
         }catch (Throwable e){
-        	e.printStackTrace();//return new ResponseEntity<>("Error during deletion", HttpStatus.BAD_REQUEST);
+        	e.printStackTrace();
         }
-        //return new ResponseEntity<>(HttpStatus.OK);
         return createDto;
     }
 
@@ -46,9 +45,9 @@ public class CatalogController {
             catalogService.deleteCatalog(dto.id);
             deleteDto.deleted = true;
         }catch (Throwable e){
-        	e.printStackTrace();//return new ResponseEntity<String>("Error during deletion", HttpStatus.BAD_REQUEST);
+        	e.printStackTrace();
         }
-        return deleteDto;//return new ResponseEntity<>(HttpStatus.OK);
+        return deleteDto;
     }
 
     @GetMapping("/")
