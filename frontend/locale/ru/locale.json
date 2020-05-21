@@ -1,0 +1,139 @@
+{
+  "Main": {
+    "preloading": "Загрузка..."
+  },
+  "Yes": "Yes",
+  "No": "No",
+  "error": {
+    "userFetch": "Unable to fetch user",
+    "forumFetch": "Unable to fetch forums",
+    "invalidForum": "Sorry, couldn't find the forum.",
+    "discussion": {
+      "fetch": "Unable to fetch discussions at the moment.",
+      "pinnedFetch": "Unable to fetch pinned discussions at the moment."
+    },
+    "create": {
+      "forum": {
+        "slug": {
+          "tooShort": "Forum slug should have at least 4 characters.",
+          "isEmpty": "Forum slug is empty. Please provide a valid Forum Slug.",
+          "notValid": "Please provide a valid Forum Slug. Slug can only contain small case alphabets and underscore."
+        },
+        "title": {
+          "tooShort": "Forum title should have at least 4 characters.",
+          "isEmpty": "Forum title is empty. Please provide a valid Forum Title.",
+          "notValid": "Please provide a valid Forum Title."
+        }
+      },
+      "tag": {
+        "same": "Same tag!!!",
+        "notValid": "Tags can only contain small letters and numbers. No space or special characters please. Min 4 and max 20 chars."
+      },
+      "discussion": {
+        "somethingBad": "Something is wrong with user/forum.",
+        "tooShort": "Title should be at least 5 characters.",
+        "isEmpty": "Please write some content before posting.",
+        "noTags": "Please provide some tags.",
+        "serverError": "Something is wrong at our server end. Please try again later",
+        "dunno": "Unable to post discussion.",
+        "invalidForum": "Invalid forum. Sorry."
+      },
+      "user": {
+        "invalidUser": "Unable to fetch user profile. Please check out for correct username."
+      }
+    },
+    "admin": {
+      "loadInfo": "Something went wrong while loading admin level information.",
+      "createForum": "Something went wrong while trying to create the forum. Please try again. Also check out if the forum already exists.",
+      "deleteForum": "Something went wrong while trying to delete the forum. Please try again later."
+    }
+  },
+  "delete": "Delete",
+  "loading": "Loading...",
+  "discussion": {
+    "no": "No discussions...",
+    "discussions" : "Обсуждения",
+    "pinned": "Закрепленные обсуждения",
+    "isPinned": "Is it a pinned discussion?",
+    "new": "New Discussion",
+    "deleting": "Deleting Discussion...",
+    "title": "Discussion title...",
+    "login": "Please sign in before posting a new discussion.",
+    "create": {
+      "where1": "You are creating a new discussion on ",
+      "where2": " forum.",
+      "done": "Your discussion is created",
+      "wait": "Posting discussion..."
+    },
+    "loading": "Loading discussion ...",
+    "cannotFetch": "Unable to fetch discussion. Please check out the url.",
+    "loginPost": "Please sign in to post a reply."
+  },
+  "forum": {
+    "title": "Forum Title",
+    "slug": "Forum Slug",
+    "current": "Current Forums",
+    "create": {
+      "wait": "Creating forum, please wait...",
+      "create": "Create New Forum"
+    },
+    "remove": {
+      "wait": "Removing forum, please wait...",
+      "remove": "Remove"
+    }
+  },
+  "opinion": {
+    "delete": {
+      "wait": "Deleting Opinion ..."
+    },
+    "post": "Posting your opinion...",
+    "tooShort": "Please provide a bit more info in your opinion... at least 10 characters."
+  },
+  "tag": {
+    "name": "Tag name"
+  },
+  "editor": {
+    "discussion": {
+      "action": "Post Discussion",
+      "placeholder": "Discussion summary..."
+    },
+    "opinion": {
+      "action": "Reply",
+      "placeholder": "Your opinion..."
+    },
+    "blockquote": "Blockquote",
+    "codeBlock": "Code Block",
+    "bold": "Bold",
+    "italic": "Italic",
+    "monospace": "Monospace"
+  },
+  "Admin": {
+    "loading": "Загружаю профиль...",
+    "sorry": "We are cordially sorry that you are not allowed to view admin panel!<br />",
+    "go1": "Please go back to ",
+    "go2": "root",
+    "go3": " page.",
+    "error": "Something went wrong.<br />",
+    "panel": "Admin Panel",
+    "welcome": "Welcome, Admin",
+    "dashboard": {
+      "loading":"Loading dashboard info...",
+      "users": "Users",
+      "discussions": "Discussions",
+      "opinions": "Opinions",
+      "forums": "Forums"
+    }
+  },
+  "login": {
+    "show": "Sign Up / Sign In",
+    "hello": "Hello, ",
+    "profile": "My Profile",
+    "logout": "Sign Out",
+    "login": "Log In",
+    "register": "Register"
+  },
+  "profile": {
+    "loading": "Loading users profile ..."
+  },
+  "404": "Couldn't found the url. Please check it out."
+}
