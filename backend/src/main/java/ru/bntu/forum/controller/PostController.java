@@ -60,8 +60,17 @@ public class PostController {
 
     @GetMapping(value = "/like/{discussionId}")
     public Post toggleFavorites(HttpServletRequest request, @PathVariable("discussionId") UUID postId){
-        UUID id = Tools.getMe(request).id;
-        return postService.toggleFavorites(postId, id);
+        try {
+        	UUID id = Tools.getMe(request).id;
+        	return postService.toggleFavorites(postId, id);
+        }
+        catch (NullPointerException ex) {
+        	;
+        }
+        catch (Throwable e){
+        	e.printStackTrace();
+        }
+    	return null;
     }
 
 }
