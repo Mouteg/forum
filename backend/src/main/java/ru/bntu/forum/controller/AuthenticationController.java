@@ -41,7 +41,7 @@ public class AuthenticationController {
 
     @Autowired
     SecurityService securityService;
-    
+
     @Autowired
     private Environment env;
 
@@ -60,13 +60,13 @@ public class AuthenticationController {
     			@RequestBody UserDto userModel,
                 HttpServletRequest request,
                 HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
-    	
+
     	cookieMaxAge = Integer.parseInt(env.getProperty("cookie.max-age"));
-    	
+
         try{
         	Cookie[] cookies = request.getCookies();
             Cookie userCookie;
-            
+
             if (cookies != null) {
             	userCookie = Arrays.stream(request.getCookies()).filter(c -> c.getName()
                     .equals("User_COOKIE")).findAny().orElse(null);
@@ -78,16 +78,16 @@ public class AuthenticationController {
             if (userCookie == null) {
                 securityService.login(userModel.username, userModel.passwordHash);
                 UserCookieDto userCookieDto = new UserCookieDto(userService.findByUsername(userModel.username));
-       		 
+
        		 	ObjectMapper objectMapper = new ObjectMapper();
                 String json = objectMapper.writeValueAsString(userCookieDto);
-                
+
                 userCookie = new Cookie("User_COOKIE", URLEncoder.encode(json, StandardCharsets.UTF_8));
-                
+
             	userCookie.setPath("/");
             	userCookie.setMaxAge(cookieMaxAge);
                 response.addCookie(userCookie);
-                
+
                 System.out.print("Created login cookie");
             }
             else {
@@ -97,7 +97,7 @@ public class AuthenticationController {
                 response.addCookie(userCookie);
             }
 
-            
+
             return new ResponseEntity<>(HttpStatus.OK);
         }catch(UsernameNotFoundException e){
             return new ResponseEntity<>("Bad Credentials", HttpStatus.FORBIDDEN);
@@ -124,12 +124,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/checkUsername")
-    public boolean existsUsername(@RequestParam String username){
+    public boolean existsUsername(@RequestBody String username){
         return userService.existsByUsername(username);
     }
 
     @PostMapping("/checkEmail")
-    public boolean existsEmail(@RequestParam String email){
+    public boolean existsEmail(@RequestBody String email){
         return userService.existsByEmail(email);
     }
 
