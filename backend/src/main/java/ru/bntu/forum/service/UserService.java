@@ -19,7 +19,7 @@ public class UserService {
 
     @Autowired
     PostRepository postRepository;
-    
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -33,10 +33,10 @@ public class UserService {
 
 	public void createUser(String username, String email, String passwordHash) {
 		User user = new User(username, email, passwordEncoder.encode(passwordHash));
-		
+
 		var roleName = userRepository.count() == 0 ? "Admin" : "User";
 		user.setRole(roleName);
-        System.out.println(user.getId());
+		System.out.println(user.getId());
 		userRepository.saveAndFlush(user);
 	}
 
@@ -47,7 +47,6 @@ public class UserService {
     public UserProfileDto getProfile(String username) {
         User user = userRepository.findByUsername(username);
         List<Post> postsByUser = postRepository.findByUser(user);
-        UserProfileDto dto = new UserProfileDto(user, postsByUser);
-        return dto;
+        return new UserProfileDto(user, postsByUser);
     }
 }

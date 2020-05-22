@@ -1,5 +1,6 @@
 package ru.bntu.forum.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +20,10 @@ import ru.bntu.forum.dto.DeleteActionDto;
 import ru.bntu.forum.model.Catalog;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.service.CatalogService;
+import ru.bntu.forum.utils.Tools;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/api/forum", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,7 +32,12 @@ public class CatalogController {
     CatalogService catalogService;
 
     @PostMapping("/create")
-    public CreateActionDto createCatalog(@RequestBody CatalogDto dto){
+    public CreateActionDto createCatalog(@RequestBody CatalogDto dto,
+                                         HttpServletRequest request,
+                                         HttpServletResponse response) throws IOException {
+      if(Tools.isNotAdmin(request, response)){
+        return null;
+      }
     	CreateActionDto createDto = new CreateActionDto();
         try{
         	catalogService.createCatalog(dto.title, dto.slug);
@@ -39,7 +49,12 @@ public class CatalogController {
     }
 
     @PostMapping("/delete")
-    public DeleteActionDto deleteCatalog(@RequestBody CatalogDto dto){
+    public DeleteActionDto deleteCatalog(@RequestBody CatalogDto dto,
+                                         HttpServletRequest request,
+                                         HttpServletResponse response) throws IOException {
+      if(Tools.isNotAdmin(request, response)){
+        return null;
+      }
     	DeleteActionDto deleteDto = new DeleteActionDto();
         try{
             catalogService.deleteCatalog(dto.id);

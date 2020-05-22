@@ -6,8 +6,11 @@ import ru.bntu.forum.dto.UserCookieDto;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -36,5 +39,13 @@ public class Tools {
             }
         }
         return userCookieDto;
+    }
+
+    public static boolean isNotAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      if(getMe(request).role.equals("Admin")){
+        return false;
+      }
+      response.sendError(403);
+      return true;
     }
 }

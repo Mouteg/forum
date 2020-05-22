@@ -11,7 +11,7 @@ import ru.bntu.forum.repository.UserRepository;
 
 @Service
 public class AdminService {
-	
+
     @Autowired
     UserRepository userRepository;
 
@@ -26,13 +26,13 @@ public class AdminService {
 
     public AdminInfoDto getInfo(){
         AdminInfoDto data = new AdminInfoDto();
-        
+
         data.userCount = userRepository.findAll().size();
         data.forums = catalogRepository.findAll();
         data.forumCount = data.forums.size();
         data.discussionCount = postRepository.findAll().size();
         data.opinionCount = commentRepository.findAll().size();
-        
+
         return data;
     }
 }
