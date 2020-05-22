@@ -13,7 +13,7 @@ public class UserProfileDto {
 			this.email = user.getEmail();
 			this.id = user.getId();
 			this.role = user.getRole();
-			this.posts = postsByUser;
+			this.discussions = postsByUser;
 		}
 
 	    public UUID id;
@@ -24,5 +24,5 @@ public class UserProfileDto {
 
 	    public String role;
 
-	    public List<Post> posts;
+	    public List<Post> discussions;
 }
