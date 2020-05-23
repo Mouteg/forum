@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ru.bntu.forum.dto.CreateActionDto;
 import ru.bntu.forum.dto.DeleteActionDto;
+import ru.bntu.forum.dto.DeleteDto;
 import ru.bntu.forum.dto.PostCreationDto;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.service.PostService;
@@ -47,10 +48,10 @@ public class PostController {
     }
 
     @DeleteMapping("/delete")
-    public DeleteActionDto deletePost(@RequestBody String slug, HttpServletResponse response){
+    public DeleteActionDto deletePost(@RequestBody DeleteDto dto, HttpServletResponse response){
     	DeleteActionDto deleteDto = new DeleteActionDto();
         try{
-            postService.deletePost(slug);
+            postService.deletePost(dto.slug);
             deleteDto.deleted = true;
         }catch (Throwable e){
         	e.printStackTrace();
@@ -65,7 +66,7 @@ public class PostController {
         	return postService.toggleFavorites(postId, id);
         }
         catch (NullPointerException ex) {
-        	;
+
         }
         catch (Throwable e){
         	e.printStackTrace();
