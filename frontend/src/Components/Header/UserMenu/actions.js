@@ -2,7 +2,7 @@ import {
   signOut
 } from './api'
 
-import history from "history"
+import history from "MyHistory"
 
 export const logOut = () => {
   return signOut().then(

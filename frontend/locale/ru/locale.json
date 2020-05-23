@@ -2,138 +2,160 @@
   "Main": {
     "preloading": "Загрузка..."
   },
-  "Yes": "Yes",
-  "No": "No",
+  "Yes": "Да",
+  "No": "Нет",
   "error": {
-    "userFetch": "Unable to fetch user",
-    "forumFetch": "Unable to fetch forums",
-    "invalidForum": "Sorry, couldn't find the forum.",
+    "userFetch": "Ошибка при загрузке пользователя",
+    "forumFetch": "Ошибка при загрузке форумов",
+    "invalidForum": "Не удалось найти форум",
     "discussion": {
-      "fetch": "Unable to fetch discussions at the moment.",
-      "pinnedFetch": "Unable to fetch pinned discussions at the moment."
+      "fetch": "Ошибка при загрузке поста.",
+      "pinnedFetch": "Ошибка при загрузке прикпелённых постов."
+    },
+    "login": {
+      "username": {
+        "isEmpty": "Имя пользователя пустое. Пожалуйста, введите имя пользователя",
+        "notFree": "Имя пользователся уже занято"
+      },
+      "password": {
+        "isEmpty": "Пароль пустой. Пожалуйста, введите пароль",
+        "notValid": "Пароль должен быть не менее 6 символов, в том числе как минимум 1 большую и маленькую букву, а так же цифры",
+        "tooShort": "Пароль должен быть не менее 6 символов."
+      },
+      "email": {
+        "isEmpty": "Адрес электронной почты пуст. Пожалуйста, введите адрес электронной почты",
+        "notValid": "Пожалуйста, введите верный адрес электронной почты",
+        "notFree": "Адрес электронной почты уже связан с одним из аккаунтов. Выберите другой адрес электронной почты"
+      },
+      "403": "Неправильное имя пользователя и/или пароль"
     },
     "create": {
       "forum": {
         "slug": {
-          "tooShort": "Forum slug should have at least 4 characters.",
-          "isEmpty": "Forum slug is empty. Please provide a valid Forum Slug.",
-          "notValid": "Please provide a valid Forum Slug. Slug can only contain small case alphabets and underscore."
+          "tooShort": "Слаг форума должен иметь минимум 4 буквы",
+          "isEmpty": "Слаг пустой. Введите корректный слаг.",
+          "notValid": "Введите корректный слаг. Слаг может содержать только нижний регистр и нижнее подчёркивание."
         },
         "title": {
-          "tooShort": "Forum title should have at least 4 characters.",
-          "isEmpty": "Forum title is empty. Please provide a valid Forum Title.",
-          "notValid": "Please provide a valid Forum Title."
+          "tooShort": "Название форума должно иметь минимум 4 буквы ",
+          "isEmpty": "Название форму пустое. Введите корректоное название форума.",
+          "notValid": "Введите корректное название форума."
         }
       },
       "tag": {
-        "same": "Same tag!!!",
-        "notValid": "Tags can only contain small letters and numbers. No space or special characters please. Min 4 and max 20 chars."
+        "same": "Тэг повторяется!",
+        "notValid": "Тэги могут состоять только из цифр и букв нижнего регистра. Минимум 4 , максимум 20 символов."
       },
       "discussion": {
-        "somethingBad": "Something is wrong with user/forum.",
-        "tooShort": "Title should be at least 5 characters.",
-        "isEmpty": "Please write some content before posting.",
-        "noTags": "Please provide some tags.",
-        "serverError": "Something is wrong at our server end. Please try again later",
-        "dunno": "Unable to post discussion.",
-        "invalidForum": "Invalid forum. Sorry."
-      },
-      "user": {
-        "invalidUser": "Unable to fetch user profile. Please check out for correct username."
+        "somethingBad": "Что-то не так с пользователем/форумом.",
+        "tooShort": "Название должно иметь минимум 5 символов.",
+        "isEmpty": "Напишите содержание поста.",
+        "noTags": "Прикрепите минимум 1 тэг.",
+        "serverError": "Ошибка сервера. Попробуйте позже",
+        "dunno": "Ошибка при создании поста.",
+        "invalidForum": "Неверный форум."
       }
     },
+    "user": {
+      "invalidUser": "Ошибка при получении профиля пользователя. Проверьте правильность никнейма."
+    },
     "admin": {
-      "loadInfo": "Something went wrong while loading admin level information.",
-      "createForum": "Something went wrong while trying to create the forum. Please try again. Also check out if the forum already exists.",
-      "deleteForum": "Something went wrong while trying to delete the forum. Please try again later."
+      "loadInfo": "Ошибка при загрузке информации для админа.",
+      "createForum": "Ошибка при создании форума. Возможно такой форум уже существует.",
+      "deleteForum": "Ошибка при удалении форума."
     }
   },
-  "delete": "Delete",
-  "loading": "Loading...",
+  "opinions": "Комментариев",
+  "favorites": "Лайкнули",
+  "delete": "Удалить",
+  "loading": "Загрузка...",
   "discussion": {
-    "no": "No discussions...",
+    "no": "Нет постов...",
     "discussions" : "Обсуждения",
     "pinned": "Закрепленные обсуждения",
-    "isPinned": "Is it a pinned discussion?",
-    "new": "New Discussion",
-    "deleting": "Deleting Discussion...",
-    "title": "Discussion title...",
-    "login": "Please sign in before posting a new discussion.",
+    "isPinned": "Это закреплённое сообщение?",
+    "new": "Новый пост",
+    "deleting": "Удалить пост...",
+    "title": "Имя поста...",
+    "login": "Войдите в систему прежде чем создавать пост.",
     "create": {
-      "where1": "You are creating a new discussion on ",
-      "where2": " forum.",
-      "done": "Your discussion is created",
-      "wait": "Posting discussion..."
+      "where1": "Вы создаёте новый пост на форуме ",
+      "where2": ".",
+      "done": "Пост успешно создан",
+      "wait": "Отправка поста..."
     },
-    "loading": "Loading discussion ...",
-    "cannotFetch": "Unable to fetch discussion. Please check out the url.",
-    "loginPost": "Please sign in to post a reply."
+    "loading": "Загрузка поста ...",
+    "cannotFetch": "Ошибка при загрузке поста. Проверьте правильность ссылки.",
+    "loginPost": "Войдите в систему чтобы оставить комментарий."
   },
   "forum": {
-    "title": "Forum Title",
-    "slug": "Forum Slug",
-    "current": "Current Forums",
+    "title": "Имя форума",
+    "slug": "Слаг форума",
+    "current": "Текущие форумы",
     "create": {
-      "wait": "Creating forum, please wait...",
-      "create": "Create New Forum"
+      "wait": "Создание форума...",
+      "create": "Создать новый форум"
     },
     "remove": {
-      "wait": "Removing forum, please wait...",
-      "remove": "Remove"
+      "wait": "Удаление форума...",
+      "remove": "Удалить"
     }
   },
   "opinion": {
     "delete": {
-      "wait": "Deleting Opinion ..."
+      "wait": "Удаление комментарий..."
     },
-    "post": "Posting your opinion...",
-    "tooShort": "Please provide a bit more info in your opinion... at least 10 characters."
+    "post": "Оставляем ваш комментарий...",
+    "tooShort": "Предоставте больше информации для комментария... минимум 10 символов."
   },
   "tag": {
-    "name": "Tag name"
+    "name": "Название тэга"
   },
   "editor": {
     "discussion": {
-      "action": "Post Discussion",
+      "action": "Создать пост",
       "placeholder": "Discussion summary..."
     },
     "opinion": {
-      "action": "Reply",
-      "placeholder": "Your opinion..."
+      "action": "Ответить",
+      "placeholder": "Ваш комментарий..."
     },
-    "blockquote": "Blockquote",
-    "codeBlock": "Code Block",
-    "bold": "Bold",
-    "italic": "Italic",
-    "monospace": "Monospace"
+    "blockquote": "Цитата",
+    "codeBlock": "Блок Кода",
+    "bold": "Жирный",
+    "italic": "Наклонный",
+    "monospace": "Моношинный"
   },
   "Admin": {
     "loading": "Загружаю профиль...",
-    "sorry": "We are cordially sorry that you are not allowed to view admin panel!<br />",
-    "go1": "Please go back to ",
-    "go2": "root",
-    "go3": " page.",
-    "error": "Something went wrong.<br />",
-    "panel": "Admin Panel",
-    "welcome": "Welcome, Admin",
+    "sorry": "Извините, но похоже, что у вас нет прав просматривать данную страницу.<br />",
+    "go1": "Вернитесь к ",
+    "go2": "главной",
+    "go3": " странице.",
+    "error": "Что-то пошло не так.<br />",
+    "panel": "Панель управления администратора",
+    "welcome": "Добро пожаловать, администратор",
     "dashboard": {
-      "loading":"Loading dashboard info...",
-      "users": "Users",
-      "discussions": "Discussions",
-      "opinions": "Opinions",
-      "forums": "Forums"
+      "loading":"Загрузка статистики...",
+      "users": "Пользователи",
+      "discussions": "Посты",
+      "opinions": "Комментарии",
+      "forums": "Форумы"
     }
   },
   "login": {
-    "show": "Sign Up / Sign In",
-    "hello": "Hello, ",
-    "profile": "My Profile",
-    "logout": "Sign Out",
-    "login": "Log In",
-    "register": "Register"
+    "show": "Регистрация / Логин",
+    "hello": "Привет, ",
+    "profile": "Мой профиль",
+    "logout": "Выйти",
+    "login": "Войти",
+    "register": "Регистрация",
+    "username": "Имя пользователя",
+    "email": "Адрес электронной почты",
+    "password": "Пароль"
   },
   "profile": {
-    "loading": "Loading users profile ..."
+    "loading": "Загрузка профилей пользователей ..."
   },
-  "404": "Couldn't found the url. Please check it out."
+  "404": "Не удалось найти ссылку. Проверьте правильность ее написания."
 }

@@ -8,6 +8,8 @@ import { singleDiscussionReducer } from '../Views/SingleDiscussion/reducers'
 import { newDiscussionReducer } from '../Views/NewDiscussion/reducers'
 import { adminInfoReducer } from '../Views/AdminDashboard/reducers'
 import { userProfileReducer } from '../Views/UserProfile/reducers'
+import { loginReducer } from '../Views/Login/LoginPage/reducers'
+import { registerReducer } from '../Views/Login/RegisterPage/reducers'
 
 // root reducer for app
 const rootReducer = combineReducers({
@@ -17,7 +19,9 @@ const rootReducer = combineReducers({
   discussion: singleDiscussionReducer,
   newDiscussion: newDiscussionReducer,
   adminInfo: adminInfoReducer,
-  userProfile: userProfileReducer
+  userProfile: userProfileReducer,
+  login: loginReducer,
+  register: registerReducer
 })
 
 // dev tool extension

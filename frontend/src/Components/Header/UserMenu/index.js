@@ -32,7 +32,7 @@ class UserMenu extends Component {
     const { activeSubMenu } = this.state
     const {
       signedIn,
-      username,
+      userName,
       t
     } = this.props
 
@@ -44,20 +44,20 @@ class UserMenu extends Component {
           </Button>
 
           { !signedIn && <Link className={styles.subMenuItem} to={`/login`}>
-            <Button className={styles.gitLoginBtn} alwaysActive>
-              <i className={classnames('fa fa-github-alt', styles.subMenuOcto)}></i>
+            <Button className={styles.LoginBtn} alwaysActive>
+              <i className={classnames('fa fa-sign-in', styles.subMenuIcon)}></i>
               <span className={styles.btnLabel}><Trans>login.login</Trans></span>
             </Button>
           </Link> }
 
           { !signedIn && <Link className={styles.subMenuItem} to={`/register`}>
-            <Button className={styles.gitLoginBtn} alwaysActive>
-              <i className={classnames('fa fa-github-alt', styles.subMenuOcto)}></i>
+            <Button className={styles.LoginBtn} alwaysActive>
+              <i className={classnames('fa fa-user-plus', styles.subMenuIcon)}></i>
               <span className={styles.btnLabel}><Trans>login.register</Trans></span>
             </Button>
           </Link>}
 
-          { signedIn && <span onClick={this.toggleSubMenu}><Link className={styles.subMenuItem} to={`/user/${username}`}><Trans>login.profile</Trans></Link></span> }
+          { signedIn && <span onClick={this.toggleSubMenu}><Link className={styles.subMenuItem} to={`/user/${userName}`}><Trans>login.profile</Trans></Link></span> }
           { signedIn && <Button className={styles.subMenuItem} onClick={() => {logOut()}}><Trans>login.logout</Trans></Button> }
         </div>
       )

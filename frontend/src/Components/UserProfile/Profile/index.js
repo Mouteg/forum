@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withTranslation } from 'react-i18next'
+import { connect } from 'react-redux'
 import classnames from 'classnames'
 import history from "MyHistory"
 import PropTypes from "prop-types"
@@ -14,12 +15,13 @@ class Profile extends Component {
       username,
       email,
       role,
-      t
+      t,
+      user
     } = this.props
 
     var adminButton = <div></div>
 
-    if (role === "Admin") {
+    if ((user.role === "Admin") && (username == user.username)) {
       adminButton = <Button
         onClick={() => {
           history.push("/admin")
@@ -54,4 +56,10 @@ Profile.propTypes = {
   role: PropTypes.string
 }
 
-export default withTranslation()(Profile)
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  }
+}
+
+export default withTranslation()(connect(mapStateToProps)(Profile))

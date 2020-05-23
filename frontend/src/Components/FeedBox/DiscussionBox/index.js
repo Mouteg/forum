@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
+import { connect } from 'react-redux'
 import classnames from 'classnames'
 import PropTypes from "prop-types"
 import Moment from 'moment'
@@ -18,7 +20,9 @@ class DiscussionBox extends Component {
       opinionCount,
       tags,
       link,
-      userProfile
+      userProfile,
+      t,
+      lang
     } = this.props
 
     const postTime = Moment(time)
@@ -29,9 +33,8 @@ class DiscussionBox extends Component {
         <div className={classnames(styles.title, userProfile && styles.titleBottomMargin)}><Link to={link}>{discussionTitle}</Link></div>
 
         { !userProfile && <div className={styles.posterInfo}>
-          <Link to={`/user/${userName}`} className={styles.name}>{userName}</Link>
           <div className={styles.emailHandler}>
-            - <i className={classnames('fa fa-envelope-o', styles.mailIcon)}></i> {email}
+            <Link to={`/user/${userName}`} className={styles.name}>{userName} - <i className={classnames('fa fa-envelope-o', styles.mailIcon)}></i> {email} </Link>
           </div>
         </div> }
 
@@ -42,8 +45,8 @@ class DiscussionBox extends Component {
 
           <div className={styles.postInfo}>
             <span className={styles.info}>{timeDisplay}</span>
-            <span className={styles.info}>{voteCount} favorites</span>
-            <span className={styles.info}>{opinionCount} opinions</span>
+            <span className={styles.info}>{voteCount} {t("favorites")}</span>
+            <span className={styles.info}>{opinionCount} {t("opinions")}</span>
           </div>
         </div>
       </div>
@@ -100,4 +103,10 @@ DiscussionBox.propTypes = {
   userProfile: PropTypes.bool
 }
 
-export default DiscussionBox
+function mapStateToProps(state) {
+  return {
+    lang: state.app.lang
+  }
+}
+
+export default withTranslation()(connect(mapStateToProps)(DiscussionBox))

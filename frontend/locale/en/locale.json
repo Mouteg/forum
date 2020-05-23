@@ -12,6 +12,23 @@
       "fetch": "Unable to fetch discussions at the moment.",
       "pinnedFetch": "Unable to fetch pinned discussions at the moment."
     },
+    "login": {
+      "username": {
+        "isEmpty": "Username is empty. Please provide a valid username",
+        "notFree": "Username already taken"
+      },
+      "password": {
+        "isEmpty": "Password is empty. Please provide a valid password",
+        "notValid": "Passwords must contain at least six characters, including uppercase, lowercase letters and numbers",
+        "tooShort": "Password should be at least 6 characters."
+      },
+      "email": {
+        "isEmpty": "Email is empty. Please provide a valid email",
+        "notValid": "Please provide a valid email address",
+        "notFree": "Email is already in use with another account"
+      },
+      "403": "Invalid username and/or password"
+    },
     "create": {
       "forum": {
         "slug": {
@@ -37,10 +54,10 @@
         "serverError": "Something is wrong at our server end. Please try again later",
         "dunno": "Unable to post discussion.",
         "invalidForum": "Invalid forum. Sorry."
-      },
-      "user": {
-        "invalidUser": "Unable to fetch user profile. Please check out for correct username."
       }
+    },
+    "user": {
+      "invalidUser": "Unable to fetch user profile. Please check out for correct username."
     },
     "admin": {
       "loadInfo": "Something went wrong while loading admin level information.",
@@ -48,6 +65,8 @@
       "deleteForum": "Something went wrong while trying to delete the forum. Please try again later."
     }
   },
+  "opinions": "opinions",
+  "favorites": "favorites",
   "delete": "Delete",
   "loading": "Loading...",
   "discussion": {
@@ -130,7 +149,10 @@
     "profile": "My Profile",
     "logout": "Sign Out",
     "login": "Log In",
-    "register": "Register"
+    "register": "Register",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password"
   },
   "profile": {
     "loading": "Loading users profile ..."

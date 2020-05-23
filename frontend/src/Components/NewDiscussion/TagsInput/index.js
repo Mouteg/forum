@@ -55,10 +55,10 @@ class TagsInput extends Component {
         })
         this.props.onChange(newTags)
       } else {
-        this.setState({ errorMsg: "error.tag.same" })
+        this.setState({ errorMsg: "error.create.tag.same" })
       }
     } else {
-      this.setState({ errorMsg: 'error.tag.notValid' })
+      this.setState({ errorMsg: 'error.create.tag.notValid' })
     }
   }
 

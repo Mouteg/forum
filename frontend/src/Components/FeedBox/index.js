@@ -78,7 +78,7 @@ class FeedBox extends Component {
                 tags={discussion.tags}
                 opinionCount={discussion.comments.length}
                 voteCount={discussion.favorites.length}
-                link={`/${userProfile ? discussion.forum.slug : currentForum}/discussion/${discussion.slug}`}
+                link={`/${userProfile ? discussion.catalog.slug : currentForum}/discussion/${discussion.slug}`}
               />
             ) }
           </div>

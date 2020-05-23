@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime"
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Route, Switch } from 'react-router'
@@ -16,6 +17,8 @@ import SingleDiscussion from '../Views/SingleDiscussion'
 import NewDiscussion from '../Views/NewDiscussion'
 import UserProfile from '../Views/UserProfile'
 import NotFound from '../Views/NotFound'
+import RegisterPage from '../Views/Login/RegisterPage'
+import LoginPage from '../Views/Login/LoginPage'
 import history from 'MyHistory'
 
 // localization stuff
@@ -34,6 +37,8 @@ ReactDOM.render (
       <Router history={ history } >
         <Switch>
           <Route path="/admin" exact component={AdminContainer} />
+          <AppRoute path="/register" exact component={RegisterPage} />
+          <AppRoute path="/login" exact component={LoginPage} />
           <AppRoute path="/" exact component={ForumFeed} />
           <AppRoute path="/user/:username" component={UserProfile} />
           <AppRoute path="/:forum/discussion/:discussion" component={SingleDiscussion} />
