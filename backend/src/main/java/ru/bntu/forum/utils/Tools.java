@@ -32,8 +32,9 @@ public class Tools {
                 ObjectMapper objectMapper = new ObjectMapper();
 
                 try {
-                	String json = Base64.getDecoder().decode(userCookie.getValue().getBytes()).toString();
-                    userCookieDto = objectMapper.readValue(json, UserCookieDto.class);
+                  byte[] decodedBytes = Base64.getDecoder().decode(userCookie.getValue());
+                  String json = new String(decodedBytes);
+                  userCookieDto = objectMapper.readValue(json, UserCookieDto.class);
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }
