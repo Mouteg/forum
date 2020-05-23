@@ -1,18 +1,18 @@
 package ru.bntu.forum.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.bntu.forum.dto.UserCookieDto;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.http.HttpResponse;
-import java.util.Arrays;
-import java.util.UUID;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ru.bntu.forum.dto.UserCookieDto;
 
 public class Tools {
     public static String generateSlug(String title){
@@ -32,8 +32,9 @@ public class Tools {
                 ObjectMapper objectMapper = new ObjectMapper();
 
                 try {
-                    userCookieDto = objectMapper.readValue(URLDecoder.decode(userCookie.getValue(), "UTF-8"), UserCookieDto.class);
-                } catch (JsonProcessingException | UnsupportedEncodingException e) {
+                	String json = Base64.getDecoder().decode(userCookie.getValue().getBytes()).toString();
+                    userCookieDto = objectMapper.readValue(json, UserCookieDto.class);
+                } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }
             }

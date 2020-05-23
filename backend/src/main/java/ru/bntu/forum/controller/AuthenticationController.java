@@ -1,9 +1,7 @@
 package ru.bntu.forum.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,7 +56,7 @@ public class AuthenticationController {
     public @ResponseBody ResponseEntity<String> login(
     			@RequestBody UserDto userModel,
                 HttpServletRequest request,
-                HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
+                HttpServletResponse response) throws JsonProcessingException {
 
     	cookieMaxAge = Integer.parseInt(env.getProperty("cookie.max-age"));
 
@@ -81,8 +78,10 @@ public class AuthenticationController {
 
        		 	ObjectMapper objectMapper = new ObjectMapper();
                 String json = objectMapper.writeValueAsString(userCookieDto);
+                
+                String encodeBytes = Base64.getEncoder().encodeToString(json.getBytes());
 
-                userCookie = new Cookie("User_COOKIE", URLEncoder.encode(json, StandardCharsets.UTF_8));
+                userCookie = new Cookie("User_COOKIE", encodeBytes);
 
             	userCookie.setPath("/");
             	userCookie.setMaxAge(cookieMaxAge);
@@ -124,13 +123,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/checkUsername")
-    public boolean existsUsername(@RequestBody String username){
-        return userService.existsByUsername(username);
+    public boolean existsUsername(@RequestBody UserDto userModel){
+        return userService.existsByUsername(userModel.username);
     }
 
     @PostMapping("/checkEmail")
-    public boolean existsEmail(@RequestBody String email){
-        return userService.existsByEmail(email);
+    public boolean existsEmail(@RequestBody UserDto userModel){
+        return userService.existsByEmail(userModel.email);
     }
 
 
