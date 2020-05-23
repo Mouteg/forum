@@ -64,7 +64,7 @@ class LoginPage extends React.Component {
                 </div>
                 <div className="form-group">
                     <Button className={classnames(styles.buttonClass)} style={{ alignSelf: 'center' }} onClick={() => { this.handleSubmit() }}>{t("login.login")}</Button>
-                    { loggingIn && <div className={styles.LoginMsg}>{t("discussion.create.wait")}</div> }
+                    { loggingIn && <div className={styles.LoginMsg}>{t("login.login.wait")}</div> }
                     <Link to="/register"><Button className={classnames(styles.buttonClass)} style={{ alignSelf: 'center' }}>{t("login.register")}</Button></Link>
                 </div>
               </div>

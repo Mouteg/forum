@@ -152,7 +152,9 @@
     "register": "Register",
     "username": "Username",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "login.wait": "Logging In...",
+    "register.wait": "Registering..."
   },
   "profile": {
     "loading": "Loading users profile ..."

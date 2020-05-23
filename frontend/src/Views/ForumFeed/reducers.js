@@ -69,7 +69,7 @@ export const feedReducer = (state = initialState, action) => {
     case FETCHING_PINNED_DISCUSSIONS_FAILURE:
       return Object.assign({}, state, {
         fetchingPinnedDiscussions: false,
-        error: 'error.pinnedFetch'
+        error: 'error.discussion.pinnedFetch'
       })
 
 

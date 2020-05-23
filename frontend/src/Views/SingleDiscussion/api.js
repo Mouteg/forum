@@ -18,9 +18,9 @@ export const postOpinionApi = (opinion) => {
 }
 
 export const deletePostApi = (discussionSlug) => {
-  return axios.delete(URLConfig + `/api/post/delete`, discussionSlug, {withCredentials: true})
+  return axios.post(URLConfig + `/api/post/delete`, { slug: discussionSlug }, {withCredentials: true})
 }
 
 export const deleteOpinionApi = (opinionId) => {
-  return axios.delete(URLConfig + `/api/comment/delete`, opinionId, {withCredentials: true})
+  return axios.post(URLConfig + `/api/comment/delete`, { id: opinionId }, {withCredentials: true})
 }
