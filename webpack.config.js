@@ -5,6 +5,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const CopyPlugin = require('copy-webpack-plugin')
 
 const env = process.env.TARGET_ENVIRONMENT || 'dev'
 const isProduction = env === 'prod'
@@ -54,6 +55,11 @@ module.exports = {
       template: "./frontend/public/index.html",
       filename: "./index.html",
       inject: 'body'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: localePath, to: path.resolve(buildPath, 'locale') }
+      ]
     })
   ],
 
