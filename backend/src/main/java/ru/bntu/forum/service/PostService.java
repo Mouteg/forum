@@ -19,7 +19,7 @@ import ru.bntu.forum.utils.Tools;
 
 @Service
 public class PostService {
-	
+
     @Autowired
     PostRepository postRepository;
 
@@ -33,8 +33,7 @@ public class PostService {
     TagRepository tagRepository;
 
     public Post getSinglePostBySlug(String slug){
-        Post post =  postRepository.findBySlug(slug).orElse(null);
-        return post;
+      return  postRepository.findBySlug(slug).orElse(null);
     }
 
     public Post getSinglePostById(UUID id){
@@ -55,7 +54,7 @@ public class PostService {
         Catalog catalog = catalogRepository.findById(catalogId).get();
         Post post = new Post(userId, user, catalogId, catalog, title, content, tags, pinned, slug);
         postRepository.saveAndFlush(post);
-        
+
         return slug;
     }
 

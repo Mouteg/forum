@@ -33,7 +33,7 @@ public class CommentController {
         return createActionDto;
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public DeleteActionDto deleteComment(@RequestBody DeleteDto dto){
     	DeleteActionDto deleteDto = new DeleteActionDto();
         try{

@@ -47,8 +47,8 @@ public class PostController {
         return createDto;
     }
 
-    @DeleteMapping("/delete")
-    public DeleteActionDto deletePost(@RequestBody DeleteDto dto, HttpServletResponse response){
+    @PostMapping("/delete")
+    public DeleteActionDto deletePost(@RequestBody DeleteDto dto){
     	DeleteActionDto deleteDto = new DeleteActionDto();
         try{
             postService.deletePost(dto.slug);
