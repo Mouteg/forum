@@ -1,9 +1,6 @@
 package ru.bntu.forum.service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -60,11 +57,13 @@ public class CatalogService {
                 case "date":{
                     Comparator<Post> byDate = Comparator.comparing(DateAudit::getCreatedAt);
                     posts.sort(byDate);
+                    Collections.reverse(posts);
                     break;
                 }
                 case "popularity":{
                     Comparator<Post> bySize = Comparator.comparingInt((Post p) -> p.getFavorites().size());
                     posts.sort(bySize);
+                    Collections.reverse(posts);
                     break;
                 }
             }
