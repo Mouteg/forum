@@ -1,5 +1,7 @@
 package ru.bntu.forum.service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ru.bntu.forum.model.Catalog;
+import ru.bntu.forum.model.Comment;
+import ru.bntu.forum.model.DateAudit;
 import ru.bntu.forum.model.Post;
 import ru.bntu.forum.model.Tag;
 import ru.bntu.forum.model.User;
@@ -33,11 +37,23 @@ public class PostService {
     TagRepository tagRepository;
 
     public Post getSinglePostBySlug(String slug){
-      return  postRepository.findBySlug(slug).orElse(null);
+    	Post post = postRepository.findBySlug(slug).orElse(null);
+    	if (post != null) {
+    		Comparator<Comment> byDate = Comparator.comparing(DateAudit::getCreatedAt);
+            post.getComments().sort(byDate);
+            Collections.reverse(post.getComments());
+    	}
+      return  post;
     }
 
     public Post getSinglePostById(UUID id){
-        return postRepository.findById(id).orElse(null);
+    	Post post = postRepository.findById(id).orElse(null);
+    	if (post != null) {
+    		Comparator<Comment> byDate = Comparator.comparing(DateAudit::getCreatedAt);
+            post.getComments().sort(byDate);
+            Collections.reverse(post.getComments());
+    	}
+      return  post;
     }
 
     public String createPost(UUID userId,

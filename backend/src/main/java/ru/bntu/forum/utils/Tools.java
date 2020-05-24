@@ -17,7 +17,13 @@ import ru.bntu.forum.dto.UserCookieDto;
 public class Tools {
     public static String generateSlug(String title){
         UUID id = UUID.randomUUID();
-        return title.replaceAll("[^a-z0-9]gi", "").toLowerCase() + "_" + id.toString().replaceAll("-", "");
+        return title
+            .replaceAll("[^a-z0-9]gi", "")
+            .replace(" ", "_")
+            .replace("!", "_")
+            .replace("?", "_")
+            .replace("=", "_")
+            .toLowerCase() + "_" + id.toString().replaceAll("-", "");
     }
 
     public static UserCookieDto getMe(HttpServletRequest request){
