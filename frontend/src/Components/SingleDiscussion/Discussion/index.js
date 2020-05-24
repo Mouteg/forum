@@ -36,11 +36,11 @@ class Discussion extends Component {
     dateDisplay = dateDisplay.from(moment())
 
     let favCount = ''
-    if (toggleingFavorite) favCount = 'Toggling Favorite...'
-    else if (userFavorited) favCount = `Favorited (${favoriteCount})`
-    else if (favoriteCount === 0) favCount = 'Make favorite'
-    else if (favoriteCount === 1) favCount = '1 favorite'
-    else favCount = `${favoriteCount} favorites`
+    if (toggleingFavorite) favCount = t('discussion.favorite.toggling')
+    else if (userFavorited) favCount = t("discussion.favorite.youLike", { favoriteCount })
+    else if (favoriteCount === 0) favCount = t("discussion.favorite.make")
+    else if (favoriteCount === 1) favCount = t("discussion.favorite.one")
+    else favCount = t("discussion.favorite.many", { favoriteCount })
 
     return (
       <div className={styles.container}>

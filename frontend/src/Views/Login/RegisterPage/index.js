@@ -70,7 +70,7 @@ class RegisterPage extends React.Component {
                 </div>
                 <div className="form-group">
                     <Button className={classnames(styles.buttonClass)} style={{ alignSelf: 'center' }} onClick={() => { this.handleSubmit() }}>{t("login.register")}</Button>
-                    { registering && <div className={styles.LoginMsg}>{t("login.register.wait")}</div> }
+                    { registering && <div className={styles.LoginMsg}>{t("login.register_wait")}</div> }
                 </div>
               </div>
             </div>

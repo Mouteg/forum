@@ -86,7 +86,16 @@
     },
     "loading": "Loading discussion ...",
     "cannotFetch": "Unable to fetch discussion. Please check out the url.",
-    "loginPost": "Please sign in to post a reply."
+    "loginPost": "Please sign in to post a reply.",
+    "popular": "Popular",
+    "latest": "Latest",
+    "favorite": {
+      "toggling": "Toggling Favorite...",
+      "youLike": "Favorited ({{favoriteCount}})",
+      "make": "Make favorite",
+      "one": "1 favorite",
+      "many": "`{{favoriteCount}} favorites"
+    }
   },
   "forum": {
     "title": "Forum Title",
@@ -153,8 +162,8 @@
     "username": "Username",
     "email": "Email",
     "password": "Password",
-    "login.wait": "Logging In...",
-    "register.wait": "Registering..."
+    "login_wait": "Logging In...",
+    "register_wait": "Registering..."
   },
   "profile": {
     "loading": "Loading users profile ..."

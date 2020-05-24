@@ -11,7 +11,8 @@ class FeedBox extends Component {
   renderSort() {
     const {
       activeSortingMethod,
-      onChangeSortingMethod
+      onChangeSortingMethod,
+      t
     } = this.props
 
     if (this.props.type === 'general') {
@@ -21,13 +22,13 @@ class FeedBox extends Component {
             className={classnames(styles.sort, (activeSortingMethod === 'date') && styles.sortActive)}
             onClick={() => onChangeSortingMethod('date')}
           >
-            Latest
+            {t("discussion.latest")}
           </span>
           <span
             className={classnames(styles.sort, (activeSortingMethod === 'popularity') && styles.sortActive)}
             onClick={() => onChangeSortingMethod('popularity')}
           >
-            Popular
+            {t("discussion.popular")}
           </span>
         </div>
       )

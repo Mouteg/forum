@@ -97,8 +97,8 @@ export const postOpinion = (opinion, discussionSlug) => {
     dispatch({ type: POSTING_OPINION_START })
 
     // validate the opinion
-    if (!opinion.content || opinion.content.length < 10) {
-      dispatch({ type: POSTING_OPINION_FAILURE, payload: 'opinion.tooShort' })
+    if (!opinion.content || opinion.content.length < 4) {
+      return dispatch({ type: POSTING_OPINION_FAILURE, payload: 'opinion.tooShort' })
     } else {
       // call the api to post the opinion
       postOpinionApi(opinion).then(
