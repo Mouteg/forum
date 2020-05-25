@@ -46,7 +46,7 @@ class Opinion extends Component {
           <div className={styles.dateInfo}>{dateDisplay}</div>
           { allowDelete && <Button className={styles.deleteButton} noUppercase onClick={() => { deleteAction(opinionId) }}>
             <i className={classnames('fa fa-trash', styles.trashIcon)}></i>
-            <span>Delete</span>
+            <span>{t("delete")}</span>
           </Button> }
           {/* <Button noUppercase>Quote</Button> */}
         </div>

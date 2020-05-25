@@ -25,7 +25,7 @@ class TagsInput extends Component {
   }
 
   validateTag(tagName) {
-    const regex = /^[a-z0-9.\-_$@*!]{4,20}$/
+    const regex = /^[a-zа-я0-9.\-_$@*!]{4,20}$/
     return regex.test(tagName)
   }
 
