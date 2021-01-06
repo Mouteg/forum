@@ -60,7 +60,7 @@
     "@babel/core": "^7.9.6",
     "async": "^3.2.0",
     "autoprefixer": "^9.7.6",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
